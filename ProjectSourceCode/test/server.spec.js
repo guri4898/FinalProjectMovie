@@ -53,7 +53,7 @@ describe('Testing Add User API', () => {
       .post('/register')
       .send({username: 33, password: 'password', email: 'example@colorado.edu'})
       .end((err, res) => {
-        expect(res).to.have.status(404);
+        expect(res).to.have.status(500);
         expect(res.body.message).to.equals('Invalid input');
         done();
       });

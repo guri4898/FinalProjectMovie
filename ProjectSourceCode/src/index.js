@@ -87,14 +87,13 @@ app.post('/register', async (req, res) => {
     //hash the password using bcrypt library
     const hash = await bcrypt.hash(req.body.password, 10);
     const username = req.body.username;
+    const email = req.body.email;
 
     // To-DO: Insert username and hashed password into the 'users' table
-    const insertNewUserQuery = `INSERT INTO users (username, password) VALUES ('${username}', '${hash}')`;
+    const insertNewUserQuery = `INSERT INTO users (username, password, email) VALUES ('${username}', '${hash}', '${email}')`;
     await db.none(insertNewUserQuery)
-    res.render('pages/login')
     
   } catch(err){
-    res.render('pages/register')
     console.log(err);
   }
 });
