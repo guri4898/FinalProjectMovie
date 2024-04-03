@@ -1,5 +1,5 @@
 {
-    "name": "<TODO: project-name>",
+    "name": "MovieMaster",
     "main": "index.js",
     "dependencies": {
       "express": "^4.6.1",
