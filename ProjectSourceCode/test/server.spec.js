@@ -42,7 +42,7 @@ describe('Testing Add User API', () => {
     chai
       .request(server)
       .post('/add_user')
-      .send({username: 'John Doe', password: 'password'})
+      .send({username: 'John Doe', password: 'password', email: 'example@colorado.edu' })
       .end((err, res) => {
         expect(res).to.have.status(200);
         expect(res.body.message).to.equals('Success');
