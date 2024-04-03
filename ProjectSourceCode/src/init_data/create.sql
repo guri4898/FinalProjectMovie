@@ -26,7 +26,7 @@ CREATE TABLE reviews (
     user_id INTEGER NOT NULL,
      review TEXT NOT NULL,
     FOREIGN KEY (movie_id) REFERENCES movie(movie_id),
-    FOREIGN KEY (user_id) REFERENCES users(user_id),
+    FOREIGN KEY (user_id) REFERENCES users(user_id)
 );
 
 DROP TABLE IF EXISTS rating CASCADE;
@@ -36,6 +36,6 @@ CREATE TABLE rating(
     user_id INT NOT NULL,
     rating INT NOT NULL,
     FOREIGN KEY (movie_id) REFERENCES movie(movie_id),
-    FOREIGN KEY (user_id) REFERENCES users(user_id),
+    FOREIGN KEY (user_id) REFERENCES users(user_id)
 );
 
