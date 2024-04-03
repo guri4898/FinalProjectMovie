@@ -24,6 +24,8 @@ DROP TABLE IF EXISTS reviews CASCADE;
 
 CREATE TABLE reviews (
     review_id SERIAL PRIMARY KEY,
+    movie_id INTEGER NOT NULL,
+    user_id INTEGER NOT NULL,
     FOREIGN KEY movie_id REFERENCES movie(movie_id),
     FOREIGN KEY user_id REFERENCES users(user_id),
     review TEXT NOT NULL
@@ -32,6 +34,8 @@ CREATE TABLE reviews (
 DROP TABLE IF EXISTS rating CASCADE;
 CREATE TABLE rating(
     rating_id SERIAL PRIMARY KEY,
+    movie_id INTEGER NOT NULL,
+    user_id INTEGER NOT NULL,
     FOREIGN KEY movie_id REFERENCES movie(movie_id),
     FOREIGN KEY user_id REFERENCES users(user_id),
     rating INTEGER NOT NULL
