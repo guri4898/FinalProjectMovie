@@ -29,7 +29,8 @@ describe('Server!', () => {
 
 // *********************** TODO: WRITE 2 UNIT TESTCASES **************************
 
-// positive test case
+
+// positive tess: add_user
 describe('Testing Add User API', () => {
   it('positive : /add_user', done => {
     chai
@@ -45,7 +46,14 @@ describe('Testing Add User API', () => {
 });
 
 //We are checking POST /add_user API by passing the user info in in incorrect manner (name cannot be an integer). This test case should pass and return a status 400 along with a "Invalid input" message.
-  // negative test case
+
+
+// negative test: add_user
+describe('Testing Add User API', () => {
+  it('positive : /add_user', done => {
+    // Refer above for the positive testcase implementation
+  });
+
   it('Negative : /add_user. Checking invalid name', done => {
     chai
       .request(server)
