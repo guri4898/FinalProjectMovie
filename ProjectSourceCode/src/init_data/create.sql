@@ -1,5 +1,4 @@
 DROP TABLE IF EXISTS users CASCADE;
-
 CREATE TABLE users(
     user_id SERIAL PRIMARY KEY,
     username VARCHAR(255) NOT NULL,
@@ -8,7 +7,6 @@ CREATE TABLE users(
 );
 
 DROP TABLE IF EXISTS movie CASCADE;
-
 CREATE TABLE movie (
     movie_id SERIAL PRIMARY KEY,
     title VARCHAR(255) NOT NULL,
@@ -26,18 +24,18 @@ CREATE TABLE reviews (
     review_id SERIAL PRIMARY KEY,
     movie_id INTEGER NOT NULL,
     user_id INTEGER NOT NULL,
-    FOREIGN KEY movie_id REFERENCES movie(movie_id),
-    FOREIGN KEY user_id REFERENCES users(user_id),
-    review TEXT NOT NULL
+     review TEXT NOT NULL,
+    FOREIGN KEY (movie_id) REFERENCES movie(movie_id),
+    FOREIGN KEY (user_id) REFERENCES users(user_id),
 );
 
 DROP TABLE IF EXISTS rating CASCADE;
 CREATE TABLE rating(
     rating_id SERIAL PRIMARY KEY,
-    movie_id INTEGER NOT NULL,
-    user_id INTEGER NOT NULL,
-    FOREIGN KEY movie_id REFERENCES movie(movie_id),
-    FOREIGN KEY user_id REFERENCES users(user_id),
-    rating INTEGER NOT NULL
+    movie_id INT NOT NULL,
+    user_id INT NOT NULL,
+    rating INT NOT NULL,
+    FOREIGN KEY (movie_id) REFERENCES movie(movie_id),
+    FOREIGN KEY (user_id) REFERENCES users(user_id),
 );
 
