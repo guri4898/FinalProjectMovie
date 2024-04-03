@@ -1,13 +1,14 @@
-<div style="margin-left: 15%; margin-right: 15%">
+<div style="margin-left: 10%; margin-right: 10%">
     <h1>Account Settings</h1>
     <form action="/update_account" method="UPDATE"> {{!--action is not correct yet and the username and email are not being fetch from the data base--}}
         <label>Change Username</label>
         <br>
         <input value="Display current username" name="username" type="text">
+        {{{username}}}
         <br>
         <label>Email</label>
         <br>
-        <p>Display email here</p>
+        <p>{{{email}}}</p>
         <br>
         <input type="submit" value="Save" style="background-color: rgb(0, 95, 249); color:aliceblue; border-radius: 5px; border-width: 0px;">
     </form>
