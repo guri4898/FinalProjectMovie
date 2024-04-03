@@ -92,8 +92,11 @@ app.post('/register', async (req, res) => {
     // To-DO: Insert username and hashed password into the 'users' table
     const insertNewUserQuery = `INSERT INTO users (username, password, email) VALUES ('${username}', '${hash}', '${email}')`;
     await db.none(insertNewUserQuery)
+
+    res.status(200).json({message: 'Success'}); 
     
   } catch(err){
+    res.status(500).json({message: 'Invalid input'});
     console.log(err);
   }
 });
