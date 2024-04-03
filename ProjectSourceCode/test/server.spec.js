@@ -69,7 +69,7 @@ describe('Testing Add User API', () => {
     chai
       .request(server)
       .post('/add_user')
-      .send({id: '5', name: 10, dob: '2020-02-20'})
+      .send({username: 33, password: 'password', email: 'example@colorado.edu'})
       .end((err, res) => {
         expect(res).to.have.status(400);
         expect(res.body.message).to.equals('Invalid input');
