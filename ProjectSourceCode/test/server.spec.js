@@ -33,11 +33,11 @@ describe('Server!', () => {
 // test case for /add_user
 describe('Testing Add User API', () => {
 
-  it('positive : /add_user', done => { // positive test case
-    it('positive : /add_user', done => {
+  it('positive : /register', done => { // positive test case
+    it('positive : /register', done => {
         chai
           .request(server)
-          .post('/add_user')
+          .post('/register')
           .send({username: 'John Doe', password: 'password', email: 'example@colorado.edu' })
           .end((err, res) => {
             expect(res).to.have.status(200);
@@ -47,13 +47,13 @@ describe('Testing Add User API', () => {
       });
   });
 
-  it('Negative : /add_user. Checking invalid name', done => { // negative test case
+  it('Negative : /register. Checking invalid name', done => { // negative test case
     chai
       .request(server)
-      .post('/add_user')
+      .post('/register')
       .send({username: 33, password: 'password', email: 'example@colorado.edu'})
       .end((err, res) => {
-        expect(res).to.have.status(400);
+        expect(res).to.have.status(404);
         expect(res.body.message).to.equals('Invalid input');
         done();
       });
