@@ -69,3 +69,11 @@ app.use(
     extended: true,
   })
 );
+
+module.exports = app.listen(3000);
+
+
+app.get('/welcome', (req, res) => {
+  res.json({status: 'success', message: 'Welcome!'});
+});
+
