@@ -2,4 +2,19 @@ Acceptance Test 1- Search movie
 
 Acceptance Test 2- Leave a review
 
+- The user should be able to click on the review button that is located near the movie
+- The user should be able to type into the text box
+- The user should be allowed should be allowed to type as much as they want
+- The user should be able to click on the button to leave a review
+- The user should not be able to submit a review with a blank text box
+
+Test Data:
+Product ID(Movie Registered with that ID): 165725
+User ID(Associated with the User): 18298
+Needs to be on a movie, needs to be logged in to leave a review
+This movie will need to be in our database so that when the user looks up the movie it will show up, if the movie is not the database then they will not be able to leave a review for the movie
+
+The information will be stored in the reviews table in the database
+
+
 Acceptance Test 3- Leave a rating
