@@ -1,4 +1,4 @@
-<header>
+{{!-- <header>
  <nav class="navbar navbar-expand-sm border-bottom">
    <div class="container">
      <button
@@ -25,4 +25,41 @@
      </div>
    </div>
  </nav>
+</header> --}}
+
+<header>
+  <nav class="navbar navbar-expand-sm border-bottom">
+    <div class="container">
+      <!-- Custom icon for the navbar -->
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar-collapse"
+        aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
+        <!-- Hamburger icon -->
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <!-- Navbar brand (optional) -->
+      <!-- <a class="navbar-brand" href="#">Navbar</a> -->
+
+      <!-- Collapsible content -->
+      <div class="collapse navbar-collapse" id="navbar-collapse">
+        <!-- List of options -->
+        <ul class="navbar-nav me-auto">
+          <!-- Add more list items as needed -->
+          <li class="nav-item">
+            <a class="nav-link" href="/option1">Option 1</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/option2">Option 2</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/option3">Option 3</a>
+          </li>
+        </ul>
+        <!-- Logout option -->
+        <div class="nav-item me-1">
+          <a class="nav-link" href="/logout">Logout</a>
+        </div>
+      </div>
+    </div>
+  </nav>
 </header>
