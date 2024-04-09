@@ -75,3 +75,19 @@ describe('Testing Logout API', () => {
 
 
 // // ********************************************************************************
+
+//Part C: 
+
+//Unit test to verify that login page was rendered correctly
+describe('Login', () => {
+  it('Positive: /login should render with html', done =>{
+    chai
+      .request(server)
+      .get('/login')
+      .end((err, res) => {
+        res.should.have.status(200);
+        res.should.be.html;
+        done();
+      });
+  })
+});
