@@ -122,6 +122,23 @@ app.get('/', (req, res) => {
 // logout
 app.get('/logout', (req, res) => {
   req.session.destroy();
-  res.status(200).json({message: 'Logged out sucessfully'});
+
+  res.render('pages/logout');
 });
 
+//get movies from api
+app.get('/movies/:title', async (req, res) => {
+  try {
+    const title = req.params.title;
+    const tmdbApiKey = 'c04b6deafdd76933b93490bacbe9a2c5'; // Replace with your TMDb API key
+    const tmdbUrl = `https://api.themoviedb.org/3/search/movie?api_key=${tmdbApiKey}&query=${title}`;
+    
+    const response = await axios.get(tmdbUrl);
+    const movieData = response.data;
+    
+    res.json({movieData});
+  } catch (error) {
+    console.error('Error fetching movie data:', error);
+    res.status(500).json({ message: 'Error fetching movie data' });
+  }
+});
