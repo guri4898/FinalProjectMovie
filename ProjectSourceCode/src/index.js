@@ -88,10 +88,18 @@ app.post('/register', async (req, res) => {
     const hash = await bcrypt.hash(req.body.password, 10);
     const username = req.body.username;
     const email = req.body.email;
+    
+    if (!username || !email || !hash){
+      throw new Error('Invalid input');
+    }
+
+    console.log("username", username);
+    console.log("email", email);
+    console.log("password", hash);
 
     // To-DO: Insert username and hashed password into the 'users' table
     const insertNewUserQuery = `INSERT INTO users (username, password, email) VALUES ('${username}', '${hash}', '${email}')`;
-    await db.none(insertNewUserQuery)
+    await db.none(insertNewUserQuery);
 
     res.status(200).json({message: 'Success'}); 
     

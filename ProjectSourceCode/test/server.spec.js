@@ -32,33 +32,33 @@ describe('Server!', () => {
 
 // test case for /add_user
 
-// describe('Testing Add User API', () => {
+describe('Testing Add User API', () => {
 
-//   it('positive : /register', done => { // positive test case
+  it('positive : /register', done => { // positive test case
     
-//         chai
-//           .request(server)
-//           .post('/register')
-//           .send({password: 'password', username: 'John Doe', email: 'example@colorado.edu' })
-//           .end((err, res) => {
-//             expect(res).to.have.status(200);
-//             expect(res.body.message).to.equals('Success');
-//             done();
-//           });
-//   });
+        chai
+          .request(server)
+          .post('/register')
+          .send({password: 'password', username: 'John Doe', email: 'example@colorado.edu' })
+          .end((err, res) => {
+            expect(res).to.have.status(200);
+            expect(res.body.message).to.equals('Success');
+            done();
+          });
+  });
 
-//   it('Negative : /register. Checking invalid name', done => { // negative test case
-//     chai
-//       .request(server)
-//       .post('/register')
-//       .send({username: 33, password: 'password', email: 'example@colorado.edu'})
-//       .end((err, res) => {
-//         expect(res).to.have.status(500);
-//         expect(res.body.message).to.equals('Invalid input');
-//         done();
-//       });
-//   });
-// });
+  it('Negative : /register. Checking invalid name', done => { // negative test case
+    chai
+      .request(server)
+      .post('/register')
+      .send({ password: 'password', email: 'example@colorado.edu'})
+      .end((err, res) => {
+        expect(res).to.have.status(500);
+        expect(res.body.message).to.equals('Invalid input');
+        done();
+      });
+  });
+});
 
 
 // // ********************************************************************************

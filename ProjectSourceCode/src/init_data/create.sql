@@ -24,7 +24,7 @@ CREATE TABLE reviews (
     review_id SERIAL PRIMARY KEY,
     movie_id INTEGER NOT NULL,
     user_id INTEGER NOT NULL,
-     review TEXT NOT NULL,
+    review TEXT NOT NULL,
     FOREIGN KEY (movie_id) REFERENCES movie(movie_id),
     FOREIGN KEY (user_id) REFERENCES users(user_id)
 );
