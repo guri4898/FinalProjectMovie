@@ -108,3 +108,11 @@ app.post('/register', async (req, res) => {
     console.log(err);
   }
 });
+
+
+// logout
+app.get('/logout', (req, res) => {
+  req.session.destroy();
+  res.status(200).json({message: 'Logged out sucessfully'});
+});
+

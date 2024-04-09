@@ -31,7 +31,6 @@ describe('Server!', () => {
 
 
 // test case for /add_user
-
 describe('Testing Add User API', () => {
 
   it('positive : /register', done => { // positive test case
@@ -55,6 +54,20 @@ describe('Testing Add User API', () => {
       .end((err, res) => {
         expect(res).to.have.status(500);
         expect(res.body.message).to.equals('Invalid input');
+        done();
+      });
+  });
+});
+
+// test case for /logout
+describe('Testing Logout API', () => {
+  it('positive : /logout', done => { // positive test case
+    chai
+      .request(server)
+      .get('/logout')
+      .end((err, res) => {
+        expect(res).to.have.status(200);
+        expect(res.body.message).to.equals('Logged out sucessfully');
         done();
       });
   });
