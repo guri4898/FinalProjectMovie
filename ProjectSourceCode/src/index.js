@@ -73,10 +73,10 @@ app.use(
 module.exports = app.listen(3000);
 
 
+
 app.get('/welcome', (req, res) => {
   res.json({status: 'success', message: 'Welcome!'});
 });
-
 
 
 
@@ -107,6 +107,15 @@ app.post('/register', async (req, res) => {
     res.status(500).json({message: 'Invalid input'});
     console.log(err);
   }
+});
+
+
+app.get('/login', (req, res) => {
+  res.render('pages/login');
+});
+
+app.get('/', (req, res) => {
+  res.render('pages/login');
 });
 
 
