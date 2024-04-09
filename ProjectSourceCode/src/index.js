@@ -118,6 +118,7 @@ app.get('/', (req, res) => {
   res.render('pages/login');
 });
 
+//something here is messing up the logout and I don't know how to fix it
 
 // logout
 app.get('/logout', (req, res) => {
