@@ -1,28 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+
+    .dropdown {
+      position: relative;
+      display: inline-block;
+    }
+    /*Button color*/
+    .dropbtn {
+      background-color: #0a0ae7;
+      color: white;
+      padding: 16px;
+      font-size: 16px;
+      border: none;
+      cursor: pointer;
+    }
+    /*This hides the list so that it only appears when its a drop down*/
+    .dropdown-content {
+      display: none;
+      position: absolute;
+      background-color: #f9f9f9;
+      min-width: 160px;
+      box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+      z-index: 1;
+    }
+    /*Color and settings of the drop down boxes*/
+    .dropdown-content a {
+      color: black;
+      padding: 12px 16px;
+      text-decoration: none;
+      display: block;
+    }
+    /*Allows for the buttons to come down when the user hovers over either of the buttons*/
+    .dropdown:hover .dropdown-content {
+      display: block;
+    }
+
+    /*Need to figure out what we want the website design to look like*/
+    /**/
+  </style>
+</head>
+<body>
+
 <header>
- <nav class="navbar navbar-expand-sm border-bottom">
-   <div class="container">
-     <button
-       class="navbar-toggler ms-auto"
-       type="button"
-       data-bs-toggle="collapse"
-       data-bs-target="#navbar-collapse"
-       aria-controls="navbar"
-       aria-expanded="false"
-       aria-label="Toggle navigation">
-       <span class="navbar-toggler-icon"></span>
-     </button>
-     <div class="collapse navbar-collapse" id="navbar-collapse">
-       <ul class="navbar-nav me-auto">
-         <li class="nav-item">
-           <!-- TODO: For Discover, add a <a> tag with an attribute href to call the '/discover' API -->
-            <a class="nav-link" href="/discover">Discover</a>
-         </li>
-       </ul>
-       <div class="nav-item me-1">
-         <!-- TODO: For Logout, add a <a> tag with an attribute href to call the '/logout API -->
-            <a class="nav-link" href="/logout">Logout</a>
-       </div>
-     </div>
-   </div>
- </nav>
+  <nav class="navbar navbar-expand-sm border-bottom">
+    <div class="container">
+      <!-- This is for the drop down buttons on the left side -->
+      <div class="dropdown">
+        <button class="dropbtn">Options</button>
+        <div class="dropdown-content">
+          <!-- Options for the user to select-->
+          <a href="/login">Login Page</a>
+          <a href="/discover">Discover</a>
+          <a href="/searchBar">Search Bar</a>
+          <a href="/option3">?</a>
+        </div>
+      </div>
+
+      <!-- This is for the right side of the website -->
+      <div class="dropdown right">
+        <button class="dropbtn">Account</button>
+        <div class="dropdown-content">
+          <!-- Options for the user to select -->
+          <!-- Not sure why it's not mapping to the account settings -->
+          <a href="./pages/account_settings.hbs">Account Settings</a>
+          <a href="/logout">Logout</a>
+        </div>
+      </div>
+    </div>
+  </nav>
 </header>
+
+</body>
+</html>
