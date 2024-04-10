@@ -113,6 +113,10 @@ app.get('/register', (req, res) => {
   res.render('pages/register');
 });
 
+app.get('/account_settings', (req, res) => {
+  res.render('pages/account_settings');
+});
+
 app.get('/home', (req, res) => {
   res.render('pages/home');
 });
@@ -157,12 +161,9 @@ app.post('/login', (req, res) => {
 
 });
 
-app.get('/', (req, res) => {
-  res.render('pages/image');
-});
 
-app.get('/image', (req, res) => {
-  res.render('pages/image');
+app.get('/', (req, res) => {
+  res.render('pages/login');
 });
 
 
