@@ -11,21 +11,43 @@ Upon searching a movie name, a page with the movie should appear for the user. I
 Acceptance Criteria:
 User cannot search without inputting text into the search box, if no text is inputted, no actions will be taken
 
-Acceptance Test 2- Leave a review
+Acceptance Test 2- Leave/View a review
 
-- The user should be able to click on the review button that is located near the movie
-- The user should be able to type into the text box
-- The user should be allowed should be allowed to type as much as they want
-- The user should be able to click on the button to leave a review
-- The user should not be able to submit a review with a blank text box
+User can submit a review:
+- The user should be able to submit a written review for the movie
+    Test Data: a written response in the text box
+    User Capability: The user should be able to navigate from the home page to the search page and be able to click on the movie then navigate to the review form/text box and type in as many characters as they would like (under 500?) then be able to submit with the submit button
+    Enviornment: Local host because it will be tested on the localhost3000
+    Testing: It will have run successful if the user was able to hit submit and then see their written response on the screen under that movie review
 
-Test Data:
-Product ID(Movie Registered with that ID): 165725
-User ID(Associated with the User): 18298
-Needs to be on a movie, needs to be logged in to leave a review
-This movie will need to be in our database so that when the user looks up the movie it will show up, if the movie is not the database then they will not be able to leave a review for the movie
+User can see current reviews on the movie:
+- The user should be able to naviagate to a movie and look at the revies that have been left on the movie as well as any review they have left on that movie
+    Test Data: Looking at submitted reviews and testing whether or not the user can see the reviews on the movies
+    User Capability: The user should be able to navigate from the home page to the search page and be able to click on the movie and navigate to the revies tab that is left if there has been any on the movie and look at those that have been submitted.
+    Enviornment: Local host because it will be tested on the localhost3000
+    Testing: The reviews that have been made on the movie are visible to the user.
 
-The information will be stored in the reviews table in the database
-
+User should not be to submit an empty review
+- The user should be required to enter text before they are able to submit and only when there is text in the boc then they will be able to submit
+    Test Data: Try submitting a review with an empty text box
+    User Capability: The user should be able to navigate from the home page to the search page and be able to click on the movie then navigate to the review form/text box then hit submit without typing anything in. They should not be allowed to submit their review.
+    Enviornment: Local host because it will be tested on the localhost3000
+    Testing: The user or tester should not be able to submit an empty text box
 
 Acceptance Test 3- Leave a rating
+
+User can submit a rating:
+- The user should be able to submit a rating from 1 out of 5 stars. This will be located as the same page as the review is.
+    Test Data: The user should be able to click any one of the buttons(stars) and be able to leave that review. We are going to try and populate all of the likes and have an average of the reviews but if not then it will just have rating left by the user.
+    User Capability: he user should be able to navigate from the home page to the search page and be able to click on the movie then navigate to the rating and then click on any of the 5 stars to leaving the rating. 
+    Enviornment: Local host because it will be tested on the localhost3000
+    Testing: The user or tester should be able to click on any of the 5 stars and then have that amount be saved. (If we end up being able to average all of the star ratings then test when each star rating)
+
+Test Enviornment:
+- This all can be tested when docker is running and the local host is up. Then the user can test to see if all of these are functional.
+
+Test Results:
+- For each time these are tested we can take a log to see whether or not they work. As well as the feedback that we receieve.
+
+Test Plan: 
+- All of these can be tested by having a group of people who have not seen our website be asked to do a few of the tasks above or all. Then see if any of the interactions that they may go through cause errors or confusion as well as all the components they are trying to run works correctly and play out.
