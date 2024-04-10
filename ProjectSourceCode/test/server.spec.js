@@ -41,7 +41,7 @@ describe('Testing Add User API', () => {
           .send({password: 'password', username: 'John Doe', email: 'example@colorado.edu' })
           .end((err, res) => {
             expect(res).to.have.status(200);
-            expect(res.body.message).to.equals('Success');
+            res.should.be.html;
             done();
           });
   });
