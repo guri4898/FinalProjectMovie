@@ -125,4 +125,3 @@ app.get('/logout', (req, res) => {
   res.status(200);
   res.render('pages/logout');
 });
-
