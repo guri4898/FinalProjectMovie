@@ -2,11 +2,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
+    <link rel="stylesheet" href="../../resources/css/style.css"> 
 </head>
 <body>
-    <div class="container">
-        <h2 class="mt-5 mb-3">Login</h2>
-        <form action="/login" method="POST">
+    <div id="formContainer">
+        <h1 style = "text-align: center;">Welcome to MovieMaster</h1>
+        <h2 style = "text-align: center;">Login to your account </h2>
+        <form action="/login" method="POST"  style = "margin-left: 100px; margin-right: 100px;">
             <div class="mb-3">
                 <label for="username" class="form-label">Username:</label>
                 <input type="text" class="form-control" id="username" name="username" required>
@@ -17,5 +19,6 @@
             </div>
             <button type="submit" class="btn btn-primary">Login</button>
         </form>
+        <a href = "/register" style = "margin-left: 100px;">Don't have an account? Register Here</a>
     </div>
 </body>
