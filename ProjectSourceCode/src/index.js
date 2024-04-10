@@ -70,6 +70,9 @@ app.use(
   })
 );
 
+app.use('/resources', express.static(path.join(__dirname, 'resources')));
+app.use('/img', express.static(path.join(__dirname, 'img')));
+
 module.exports = app.listen(3000);
 
 
