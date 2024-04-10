@@ -122,6 +122,10 @@ app.get('/login', (req, res) => {
   res.render('pages/login');
 });
 
+app.get('/home', (req, res) => {
+  res.render('pages/home');
+});
+
 // logout
 app.get('/logout', (req, res) => {
   req.session.destroy();
