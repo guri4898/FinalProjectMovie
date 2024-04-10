@@ -12,6 +12,7 @@ const bodyParser = require('body-parser');
 const session = require('express-session'); // To set the session object. To store or access session data, use the `req.session`, which is (generally) serialized as JSON by the store.
 const bcrypt = require('bcrypt'); //  To hash passwords
 const axios = require('axios'); // To make HTTP requests from our server. We'll learn more about it in Part B.
+const { emitWarning } = require('process');
 
 // *****************************************************
 // <!-- Section 2 : Connect to DB -->
@@ -119,6 +120,28 @@ app.get('/account_settings', (req, res) => {
 
 app.get('/home', (req, res) => {
   res.render('pages/home');
+});
+
+app.post('/home', (req, res) => {
+    
+    const origSearchedQuery = req.body.searchQ;
+    const searchedQuer = origSearchedQuery.toLowerCase();
+
+    const query = 'SELECT * FROM movie WHERE title LIKE %$1%';
+
+    db.any(query, [searchedQuer])
+    .then(movies => {
+      if (movies.length() == 0){
+        res.render('pages/home',{ //if no movies are found, meaning the length of the results is 0, then noData is returned as true, so in hbs it would check the conditional if noData is true
+          noData: true
+        })
+      }
+      else{
+        res.render('pages/home', {movies})
+      }
+    })
+    
+
 });
 
 app.get('/login', (req, res) => {
