@@ -1,0 +1,6 @@
+#formContainer {
+    width: 50%; /* Adjust the width as needed */
+    margin: 0 auto; /* This will center the container horizontally */
+    margin-top: 50px; /* Adjust the top margin as needed */
+    text-align: center; /* This will center the content inside the container */
+  }
