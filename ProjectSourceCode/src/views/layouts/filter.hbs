@@ -1,0 +1,274 @@
+{{!Sample Code for a sidebar with Filter(still need to edit it)
+<div class="overlay" style="display:none"></div>
+<div class="search-section">
+  <div class="container-fluid container-xl">
+    <div class="row main-content ml-md-0">
+      <div class="sidebar col-md-3 px-0">
+        <h1 class="border-bottom filter-header d-flex d-md-none p-3 mb-0 align-items-center">
+          <span class="mr-2 filter-close-btn">
+              X
+          </span>
+          Filters
+          <span class="ml-auto text-uppercase">Reset Filters</span>
+        </h1>
+        <div class="sidebar__inner ">
+          <div class="filter-body">
+            <div>
+              <h2 class="border-bottom filter-title">Seating Options</h2>
+              <div class="mb-30 filter-options">
+                <div class="custom-control custom-checkbox mb-3">
+                  <input type="checkbox" class="custom-control-input" id="Indoor" checked>
+                  <label class="custom-control-label" for="Indoor">Indoor</label>
+                </div>
+                <div class="custom-control custom-checkbox mb-3">
+                  <input type="checkbox" class="custom-control-input" id="Outdoor">
+                  <label class="custom-control-label" for="Outdoor">Outdoor</label>
+                </div>
+              </div>
+              <!--seating option end-->
+              <h2 class="font-xbold body-font border-bottom filter-title">Cuisines</h2>
+              <div class="mb-3 filter-options" id="cusine-options">
+                <div class="custom-control custom-checkbox mb-3">
+                  <input type="checkbox" class="custom-control-input" id="Chinese" checked>
+                  <label class="custom-control-label" for="Chinese">Chinese</label>
+                </div>
+                <div class="custom-control custom-checkbox mb-3">
+                  <input type="checkbox" class="custom-control-input" id="Italian">
+                  <label class="custom-control-label" for="Italian">Italian</label>
+                </div>
+                <div class="custom-control custom-checkbox mb-3">
+                  <input type="checkbox" class="custom-control-input" id="Mexican">
+                  <label class="custom-control-label" for="Mexican">Mexican</label>
+                </div>
+                <div class="custom-control custom-checkbox mb-3">
+                  <input type="checkbox" class="custom-control-input" id="Thai">
+                  <label class="custom-control-label" for="Thai">Thai</label>
+                </div>
+                <div class="custom-control custom-checkbox mb-3">
+                  <input type="checkbox" class="custom-control-input" id="Gujarati">
+                  <label class="custom-control-label" for="Gujarati">Gujarati</label>
+                </div>
+                <div class="custom-control custom-checkbox mb-3">
+                  <input type="checkbox" class="custom-control-input" id="Panjabi">
+                  <label class="custom-control-label" for="Panjabi">Panjabi</label>
+                </div>
+                <div class="custom-control custom-checkbox mb-3">
+                  <input type="checkbox" class="custom-control-input" id="South-Indian">
+                  <label class="custom-control-label" for="South-Indian">South Indian</label>
+                </div>
+              </div>
+
+              <!-- cusine filters end -->
+              <h2 class="font-xbold body-font border-bottom filter-title">Price Range</h2>
+              <div class="mb-3 theme-clr xs2-font d-flex justify-content-between">
+                <span id="slider-range-value1">$100</span>
+                <span id="slider-range-value2">$10,000</span>
+              </div>
+              <div class="mb-30 filter-options">
+                <div>
+                  <div id="slider-range">
+                    <form>
+                      <div class="form-group">
+                        <input type="range" class="form-control-range" id="">
+                      </div>
+                    </form>
+                  </div>
+                </div>
+              </div>
+              <h2 class="border-bottom filter-title">Services</h2>
+              <div class="mb-3 filter-options" id="services-options">
+                <div class="custom-control custom-checkbox mb-3">
+                  <input type="checkbox" class="custom-control-input" id="Breakfast" checked>
+                  <label class="custom-control-label" for="Breakfast">Breakfast</label>
+                </div>
+                <div class="custom-control custom-checkbox mb-3">
+                  <input type="checkbox" class="custom-control-input" id="Lunch">
+                  <label class="custom-control-label" for="Lunch">Lunch</label>
+                </div>
+                <div class="custom-control custom-checkbox mb-3">
+                  <input type="checkbox" class="custom-control-input" id="Donner">
+                  <label class="custom-control-label" for="Donner">Donner</label>
+                </div>
+                <div class="custom-control custom-checkbox mb-3">
+                  <input type="checkbox" class="custom-control-input" id="Cafe">
+                  <label class="custom-control-label" for="Cafe">Cafe</label>
+                </div>
+                <div class="custom-control custom-checkbox mb-3">
+                  <input type="checkbox" class="custom-control-input" id="Brunch">
+                  <label class="custom-control-label" for="Brunch">Brunch</label>
+                </div>
+                <div class="custom-control custom-checkbox mb-3">
+                  <input type="checkbox" class="custom-control-input" id="other">
+                  <label class="custom-control-label" for="other">Other</label>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      --------------------CSS----------------
+     
+body{font-size:14px;}
+span{font-size:14px;}
+.overlay {
+    background: rgb(0 0 0 / 55%);
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    z-index: 1030;
+}
+.search-section {
+  padding: 50px 0;
+}
+.filter-header {
+  font-weight: bold;
+  font-size: 30px;
+}
+.filter-title {
+  font-weight: bold;
+  font-size: 20px;
+  padding-bottom: 14px;
+  margin-bottom: 15px;
+}
+.title {
+  font-weight: bold;
+  font-size: 20px;
+  padding-bottom: 0;
+  margin-bottom: 15px;
+}
+.mb-30 {
+  margin-bottom: 30px;
+}
+.row-grid img{margin-bottom:30px;max-width:100%}
+@media (max-width: 767.98px) {
+ .filters-actions {
+    position: fixed;
+    background: #fff;
+    display: flex;
+    justify-content: center;
+    border:0;
+    bottom: 0;
+    z-index: 1031;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    box-shadow: 0px -2px 3px rgb(0 0 0 / 21%);
+    -webkit-box-shadow: 0px -2px 3px rgb(0 0 0 / 21%);
+    -moz-box-shadow: 0px -2px 3px rgb(0 0 0 / 21%);
+    height: 50px;
+   }
+    .filters-actions>div {
+        flex: 1;
+        text-align: center;
+       
+    }
+    .filters-actions>div:first-of-type{
+    border-right: 1px solid #d6d1ce;
+    }
+    .filters-actions>div>* {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+}
+    /*.no-border-select.sort-select + .select2-container--default .select2-selection--single{
+      background-image: none;
+      padding:10px;
+    }*/
+.filter-btn, .filter-btn:hover, .filter-btn:focus, .filter-btn:active {
+    padding: 14px 20px;
+    height: 50px;
+    border: 0;
+     position: relative;
+    z-index: 1;
+    background: #fff;
+    border-radius: 0;
+}
+    .sort-drop .dropdown-menu{
+   width: 100%;
+    left: 0;
+    position: fixed !important;
+    transform: translateY(100%) !important;
+    bottom: 50px !important;
+    top: auto !important;
+    text-align: center;
+    border-radius: 6px 6px 0 0 !important;
+    box-shadow: none !important;
+    transition: .3s;
+    display: block;
+   /* border: 0;*/
+    z-index: -11;
+    }
+     .sort-drop .dropdown-menu .dropdown-item{padding:15px 20px !important;}
+    .sort-drop .dropdown-menu .dropdown-item:first-child{
+      border-radius: 6px 6px 0 0 !important;
+    }
+    .sort-drop.show .dropdown-menu{
+    transform: translateY(0) !important;
+    }
+    .btn.sort-toggle{
+     background-image: none;
+     padding:10px !important;
+     width: 100%;
+    border: 0;
+    height: 50px;
+    position: relative;
+    z-index: 1;
+    background: #fff;
+    border-radius: 0;
+    font-size: 16px;
+    line-height: 22px;
+    }
+    .sidebar {
+    position: fixed;
+    transform: translateY(100%);
+    -webkit-transform: translateY(100%);
+    -moz-transform: translateY(100%);
+    -o-transform: translateY(100%);
+    transition: .3s;
+    -webkit-transition: .3s;
+    -moz-transition: .3s;
+    -o-transition: .3s;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    top: 0;
+   
+     background: #fff;
+    
+   }
+   .sidebar.open{
+     z-index: 1032;
+     transform: translateY(0);
+    -webkit-transform: translateY(0);
+    -moz-transform: translateY(0);
+    -o-transform: translateY(0);
+   }
+   .sidebar__inner {
+    padding: 15px;
+    height: calc(100% - 58px);
+    overflow-y: auto;
+   }
+   .filter-header{height: 58px;}
+   .filter-body{padding-right: 0;}
+}
+
+----------------SOME JS-----------------
+const mediaQuerySM = window.matchMedia('(min-width: 768px)')
+      // if > then = to 768
+      if (mediaQuerySM.matches) {
+        // sidebar sticky function
+         var sidebar = new StickySidebar('.sidebar', {
+          topSpacing: 80,
+          bottomSpacing: 20,
+          containerSelector: '.main-content',
+          innerWrapperSelector: '.sidebar__inner'
+        });
+      }
+
+      }}
+
+      
