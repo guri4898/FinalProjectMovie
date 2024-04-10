@@ -79,7 +79,6 @@ app.get('/welcome', (req, res) => {
 });
 
 
-
 // Register
 app.post('/register', async (req, res) => {
 
@@ -114,15 +113,23 @@ app.get('/register', (req, res) => {
 });
 
 app.get('/account_settings', (req, res) => {
-  res.render('pages/account_settings');
+  res.render('pages/account_settings',{
+    display: true
+  });
 });
 
+
+
 app.get('/home', (req, res) => {
-  res.render('pages/home');
+  res.render('pages/home',{
+    display: true
+  });
 });
 
 app.get('/login', (req, res) => {
-  res.render('pages/login');
+  res.render('pages/login',{
+    display: false
+  });
 });
 
 app.post('/login', (req, res) => {
@@ -139,14 +146,17 @@ app.post('/login', (req, res) => {
       req.session.user = user;
       req.session.save();
       res.status(200);
-      res.render('pages/account_settings'); //need to redirect to api route that displays movies
+      res.render('pages/account_settings',{
+        display: true
+      }); //need to redirect to api route that displays movies
     }
     else{
       //print incorrect password to user
       res.status(501)
       .render('pages/login', {
         message: 'Incorrect Password',
-        error: true
+        error: true,
+        display: true
       });
     }
 
@@ -161,12 +171,18 @@ app.post('/login', (req, res) => {
 
 });
 
+
+
 app.get('/', (req, res) => {
-  res.render('pages/image');
+  res.render('pages/image',{
+    display: false
+  });
 });
 
 app.get('/image', (req, res) => {
-  res.render('pages/image');
+  res.render('pages/image',{
+    display: false
+  });
 });
 
 
