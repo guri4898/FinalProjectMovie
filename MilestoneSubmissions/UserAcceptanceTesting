@@ -1,5 +1,16 @@
 Acceptance Test 1- Search movie
 
+- The test envionrment should be on localhost
+Test Cases:
+- Users should be able to click on the search box
+- Users should be able to type in search box and input text
+- Users upon pressing search/enter, will be able to be redirected to a page with the input they searched for (if applicable)
+
+Test Data:
+Upon searching a movie name, a page with the movie should appear for the user. Information from movie stored in movie DB.
+Acceptance Criteria:
+User cannot search without inputting text into the search box, if no text is inputted, no actions will be taken
+
 Acceptance Test 2- Leave a review
 
 - The user should be able to click on the review button that is located near the movie
