@@ -101,7 +101,7 @@ app.post('/register', async (req, res) => {
     const insertNewUserQuery = `INSERT INTO users (username, password, email) VALUES ('${username}', '${hash}', '${email}')`;
     await db.none(insertNewUserQuery);
 
-    res.status(200).json({message: 'Success'}); 
+    res.status(200).render('pages/login'); 
     
   } catch(err){
     res.status(500).json({message: 'Invalid input'});
@@ -110,9 +110,42 @@ app.post('/register', async (req, res) => {
 });
 
 
-app.get('/login', (req, res) => {
-  res.render('pages/login');
+app.post('/login', (req, res) => {
+    
+  const query = "SELECT * FROM users WHERE username = $1;";
+
+  db.one(query, [req.body.username])
+  .then(async function(user){
+
+    const match = await bcrypt.compare(req.body.password, user.password);        
+
+    if(match){
+
+      req.session.user = user;
+      req.session.save();
+      res.status(200);
+      res.render('pages/account_settings'); //need to redirect to api route that displays movies
+    }
+    else{
+      //print incorrect password to user
+      res.status(501)
+      .render('pages/login', {
+        message: 'Incorrect Password',
+        error: true
+      });
+    }
+
+  })
+  .catch(function(error){
+    res.status(500)
+    .render('pages/register', {
+      error: true,
+      message: 'User does not exist'
+    });
+  });
+
 });
+
 
 app.get('/', (req, res) => {
   res.render('pages/login');

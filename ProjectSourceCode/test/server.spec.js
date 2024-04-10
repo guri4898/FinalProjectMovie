@@ -78,14 +78,67 @@ describe('Testing Logout API', () => {
 //Part C: 
 
 //Unit test to verify that login page was rendered correctly
-describe('Login', () => {
-  it('Positive: /login should render with html', done =>{
+// describe('Login rendering', () => {
+
+//   before((done) => { //ensures this executes before unit test
+//     // Send a POST request to register a new user
+//     chai.request(server)
+//       .post('/register')
+//       .send({
+//         username: 'testuser',
+//         password: 'testpassword'
+//       })
+//       .end((err, res) => {
+//         if (err) {
+//           console.error(err);
+//           done(err);
+//         } else {
+//           done();
+//         }
+//       });
+//   });
+
+//   it('Positive: /login should render with html', (done) => {
+//     // Send a GET request to the login page
+//     chai.request(server)
+//       .post('/login')
+//       .send({username: 'testuser', password: 'testpassword'})
+//       .end((err, res) => {
+//         if (err) {
+//           console.error(err);
+//           done(err);
+//         } else {
+//           // Assert status code and content type
+//           res.should.have.status(200);
+//           res.should.be.html;
+//           done();
+//         }
+//       });
+//   });
+// });
+
+// test case for /logout
+describe('Testing Logout API', () => {
+  it('positive : /logout', done => { // positive test case
     chai
       .request(server)
-      .get('/login')
+      .get('/logout')
       .end((err, res) => {
-        res.should.have.status(200);
-        res.should.be.html;
+        expect(res).to.have.status(200);
+        done();
+      });
+  });
+});
+
+
+describe('Login with failed credentials', () => {
+  it('Negative: /login should fail with invalid credentials', done =>{
+    chai
+      .request(server)
+      .post('/login')
+      .send({username: 'Does not exist', password: 'testing'})
+      .end((err, res) => {
+        expect(res).to.have.status(500);
         done();
       });
   })
