@@ -17,3 +17,28 @@
         </form>
     </div>
 </form>
+
+<div class="container">
+  {{#if message}}
+    <div class="alert alert-danger">{{message}}</div>
+  {{/if}}
+
+  <div class="row">
+    {{#each results as |event|}}
+      <div class="col-md-4 mb-4">
+        <div class="card">
+          {{#if event.images}}
+            <img src="{{event.images.[0].url}}" class="card-img-top" alt="{{event.name}}">
+          {{else}}
+            <img src="path/to/default-image.jpg" class="card-img-top" alt="Default Image">
+          {{/if}}
+          <div class="card-body">
+            <h5 class="card-title">{{event.name}}</h5>
+            <p class="card-text">{{event.dates.start.localDate}} at {{event.dates.start.localTime}}</p>
+            <a href="{{event.url}}" class="btn btn-primary">Book Now</a>
+          </div>
+        </div>
+      </div>
+    {{/each}}
+  </div>
+</div>
