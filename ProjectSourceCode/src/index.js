@@ -157,9 +157,12 @@ app.post('/login', (req, res) => {
 
 });
 
-
 app.get('/', (req, res) => {
-  res.render('pages/login');
+  res.render('pages/image');
+});
+
+app.get('/image', (req, res) => {
+  res.render('pages/image');
 });
 
 
