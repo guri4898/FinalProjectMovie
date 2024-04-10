@@ -1,0 +1,9 @@
+/* CSS rules specific to elements within image.hbs */
+#image-page .navbar-custom {
+    display: none;
+    visibility: hidden;
+}
+
+#image-page header {
+    display: none;
+}

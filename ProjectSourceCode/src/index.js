@@ -110,19 +110,21 @@ app.post('/register', async (req, res) => {
 });
 
 
+app.get('/', (req, res) => {
+  res.render('pages/image');
+});
+
+app.get('/image', (req, res) => {
+  res.render('pages/image');
+});
+
 app.get('/login', (req, res) => {
   res.render('pages/login');
 });
 
-app.get('/', (req, res) => {
-  res.render('pages/login');
-});
-
-//something here is messing up the logout and I don't know how to fix it
-
 // logout
 app.get('/logout', (req, res) => {
   req.session.destroy();
-  res.status(200).json({message: 'Logged out sucessfully'});
+  res.status(200);
+  res.render('pages/logout');
 });
-
