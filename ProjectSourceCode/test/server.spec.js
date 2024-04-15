@@ -1,27 +1,27 @@
 // ********************** Initialize server **********************************
 
-const server = require('../src/index.js'); //TODO: Make sure the path to your index.js is correctly added
+const server = require("../src/index.js"); //TODO: Make sure the path to your index.js is correctly added
 
 // ********************** Import Libraries ***********************************
 
-const chai = require('chai'); // Chai HTTP provides an interface for live integration testing of the API's.
-const chaiHttp = require('chai-http');
+const chai = require("chai"); // Chai HTTP provides an interface for live integration testing of the API's.
+const chaiHttp = require("chai-http");
 chai.should();
 chai.use(chaiHttp);
-const {assert, expect} = chai;
+const { assert, expect } = chai;
 
 // ********************** DEFAULT WELCOME TESTCASE ****************************
 
-describe('Server!', () => {
+describe("Server!", () => {
   // Sample test case given to test / endpoint.
-  it('Returns the default welcome message', done => {
+  it("Returns the default welcome message", (done) => {
     chai
       .request(server)
-      .get('/welcome')
+      .get("/welcome")
       .end((err, res) => {
         expect(res).to.have.status(200);
-        expect(res.body.status).to.equals('success');
-        assert.strictEqual(res.body.message, 'Welcome!');
+        expect(res.body.status).to.equals("success");
+        assert.strictEqual(res.body.message, "Welcome!");
         done();
       });
   });
@@ -29,42 +29,47 @@ describe('Server!', () => {
 
 // *********************** TODO: WRITE 2 UNIT TESTCASES **************************
 
-
 // test case for /add_user
-describe('Testing Add User API', () => {
+describe("Testing Add User API", () => {
+  it("positive : /register", (done) => {
+    // positive test case
 
-  it('positive : /register', done => { // positive test case
-    
-        chai
-          .request(server)
-          .post('/register')
-          .send({password: 'password', username: 'John Doe', email: 'example@colorado.edu' })
-          .end((err, res) => {
-            expect(res).to.have.status(200);
-            res.should.be.html;
-            done();
-          });
-  });
-
-  it('Negative : /register. Checking invalid name', done => { // negative test case
     chai
       .request(server)
-      .post('/register')
-      .send({ password: 'password', email: 'example@colorado.edu'})
+      .post("/register")
+      .send({
+        password: "password",
+        username: "John Doe",
+        email: "example@colorado.edu",
+      })
+      .end((err, res) => {
+        expect(res).to.have.status(200);
+        res.should.be.html;
+        done();
+      });
+  });
+
+  it("Negative : /register. Checking invalid name", (done) => {
+    // negative test case
+    chai
+      .request(server)
+      .post("/register")
+      .send({ password: "password", email: "example@colorado.edu" })
       .end((err, res) => {
         expect(res).to.have.status(500);
-        expect(res.body.message).to.equals('Invalid input');
+        expect(res.body.message).to.equals("Invalid input");
         done();
       });
   });
 });
 
 // test case for /logout
-describe('Testing Logout API', () => {
-  it('positive : /logout', done => { // positive test case
+describe("Testing Logout API", () => {
+  it("positive : /logout", (done) => {
+    // positive test case
     chai
       .request(server)
-      .get('/logout')
+      .get("/logout")
       .end((err, res) => {
         expect(res).to.have.status(200);
         done();
@@ -72,10 +77,9 @@ describe('Testing Logout API', () => {
   });
 });
 
-
 // // ********************************************************************************
 
-//Part C: 
+//Part C:
 
 //Unit test to verify that login page was rendered correctly
 // describe('Login rendering', () => {
@@ -118,11 +122,12 @@ describe('Testing Logout API', () => {
 // });
 
 // test case for /logout
-describe('Testing Logout API', () => {
-  it('positive : /logout', done => { // positive test case
+describe("Testing Logout API", () => {
+  it("positive : /logout", (done) => {
+    // positive test case
     chai
       .request(server)
-      .get('/logout')
+      .get("/logout")
       .end((err, res) => {
         expect(res).to.have.status(200);
         done();
@@ -130,16 +135,15 @@ describe('Testing Logout API', () => {
   });
 });
 
-
-describe('Login with failed credentials', () => {
-  it('Negative: /login should fail with invalid credentials', done =>{
+describe("Login with failed credentials", () => {
+  it("Negative: /login should fail with invalid credentials", (done) => {
     chai
       .request(server)
-      .post('/login')
-      .send({username: 'Does not exist', password: 'testing'})
+      .post("/login")
+      .send({ username: "Does not exist", password: "testing" })
       .end((err, res) => {
         expect(res).to.have.status(500);
         done();
       });
-  })
+  });
 });

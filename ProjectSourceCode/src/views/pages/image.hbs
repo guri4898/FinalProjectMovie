@@ -1,41 +1,29 @@
-<!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Welcome</title>
     <style>
-        /* Center the container */
-        body {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            margin: 0;
-            background-color: #10091b; /* Optional: Add a background color for the page */
-        }
-        .container {
-            text-align: center;
-        }
-        img {
-            width: 600px; /* Adjust the width of the image as needed */
-            height: auto;
-        }
+      /* Center the container */ body { display: flex; justify-content: center;
+      align-items: center; height: 100vh; margin: 0; background-color: #10091b;
+      /* Optional: Add a background color for the page */ } .container {
+      text-align: center; } img { width: 600px; /* Adjust the width of the image
+      as needed */ height: auto; }
     </style>
-</head>
-<body id="image-page"> <!-- Assign ID to body element -->
+  </head>
+  <body id="image-page">
+    <!-- Assign ID to body element -->
     <!-- Container for image -->
     <div class="container">
-        <!-- Image to display -->
-        <img id="welcomeImage" src="../../resources/img/MovieMasterLogo.png">
+      <!-- Image to display -->
+      <img id="welcomeImage" src="../../resources/img/MovieMasterLogo.png" />
     </div>
 
     <!-- JavaScript to redirect after 3 seconds -->
     <script>
-        setTimeout(function() {
-            // Redirect to the login page after 4 seconds (adjusted from 3 seconds in your previous code)
-            window.location.href = '/login';
-        }, 2000); // 4000 milliseconds = 4 seconds
+      setTimeout(function() { // Redirect to the login page after 4 seconds
+      (adjusted from 3 seconds in your previous code) window.location.href =
+      '/login'; }, 2000); // 4000 milliseconds = 4 seconds
     </script>
-</body>
+  </body>
 </html>

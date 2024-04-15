@@ -1,21 +1,30 @@
 <form action="/home" method="POST">
-    <br>
-    <div class="search-bar">
-        <form class="form-inline my-2 my-lg-0">
-            <div class="row">
-                <div class="col col-3">
-                </div>
-                <div class="col-7">
-                    <nav class="search-bar-1">
-                        <input class="form-control mr-sm-2" type="search" id = "searchQ" placeholder="Search" aria-label="Search">
-                    </nav>
-                </div>
-                <div class="col">
-                    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-                </div>
-            </div>
-        </form>
-    </div>
+  <br />
+  <div class="search-bar">
+    <form class="form-inline my-2 my-lg-0">
+      <div class="row">
+        <div class="col col-3">
+        </div>
+        <div class="col-7">
+          <nav class="search-bar-1">
+            <input
+              class="form-control mr-sm-2"
+              type="search"
+              id="searchQ"
+              placeholder="Search"
+              aria-label="Search"
+            />
+          </nav>
+        </div>
+        <div class="col">
+          <button
+            class="btn btn-outline-success my-2 my-sm-0"
+            type="submit"
+          >Search</button>
+        </div>
+      </div>
+    </form>
+  </div>
 </form>
 
 <div class="container">
@@ -28,13 +37,23 @@
       <div class="col-md-4 mb-4">
         <div class="card">
           {{#if event.images}}
-            <img src="{{event.images.[0].url}}" class="card-img-top" alt="{{event.name}}">
+            <img
+              src="{{event.images.[0].url}}"
+              class="card-img-top"
+              alt="{{event.name}}"
+            />
           {{else}}
-            <img src="path/to/default-image.jpg" class="card-img-top" alt="Default Image">
+            <img
+              src="path/to/default-image.jpg"
+              class="card-img-top"
+              alt="Default Image"
+            />
           {{/if}}
           <div class="card-body">
             <h5 class="card-title">{{event.name}}</h5>
-            <p class="card-text">{{event.dates.start.localDate}} at {{event.dates.start.localTime}}</p>
+            <p class="card-text">{{event.dates.start.localDate}}
+              at
+              {{event.dates.start.localTime}}</p>
             <a href="{{event.url}}" class="btn btn-primary">Book Now</a>
           </div>
         </div>
