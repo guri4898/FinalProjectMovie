@@ -96,34 +96,34 @@ INSERT INTO genres (genre) VALUES ('Sci-Fi Comedy');
 INSERT INTO genres (genre) VALUES ('Thriller Comedy');
 
 INSERT INTO movie (title, year, director, description, image, avg_rating)
-VALUES ('The Shawshank Redemption', 1994, 'Frank Darabont', 'Two imprisoned men bond over a number of years, finding solace and eventual redemption through acts of common decency.', 'shawshank_redemption.jpg', 9.3);
+VALUES ('The Shawshank Redemption', 1994, 'Frank Darabont', 'Two imprisoned men bond over a number of years, finding solace and eventual redemption through acts of common decency.', 'https://m.media-amazon.com/images/I/71715eBi1sL._AC_UF894,1000_QL80_.jpg', 9.3);
 
 INSERT INTO movie (title, year, director, description, image, avg_rating)
-VALUES ('The Godfather', 1972, 'Francis Ford Coppola', 'An organized crime dynasty''s aging patriarch transfers control of his clandestine empire to his reluctant son.', 'godfather.jpg', 9.2);
+VALUES ('The Godfather', 1972, 'Francis Ford Coppola', 'An organized crime dynasty''s aging patriarch transfers control of his clandestine empire to his reluctant son.', 'https://m.media-amazon.com/images/M/MV5BM2MyNjYxNmUtYTAwNi00MTYxLWJmNWYtYzZlODY3ZTk3OTFlXkEyXkFqcGdeQXVyNzkwMjQ5NzM@._V1_.jpg', 9.2);
 
 INSERT INTO movie (title, year, director, description, image, avg_rating)
-VALUES ('The Dark Knight', 2008, 'Christopher Nolan', 'When the menace known as the Joker wreaks havoc and chaos on the people of Gotham, Batman must accept one of the greatest psychological and physical tests of his ability to fight injustice.', 'dark_knight.jpg', 9.0);
+VALUES ('The Dark Knight', 2008, 'Christopher Nolan', 'When the menace known as the Joker wreaks havoc and chaos on the people of Gotham, Batman must accept one of the greatest psychological and physical tests of his ability to fight injustice.', 'https://www.movieposters.com/cdn/shop/products/d3401e97e249c56ed1c11a13dd02b47f_500x.jpg?v=1573652550', 9.0);
 
 INSERT INTO movie (title, year, director, description, image, avg_rating)
-VALUES ('Pulp Fiction', 1994, 'Quentin Tarantino', 'The lives of two mob hitmen, a boxer, a gangster and his wife, and a pair of diner bandits intertwine in four tales of violence and redemption.', 'pulp_fiction.jpg', 8.9);
+VALUES ('Pulp Fiction', 1994, 'Quentin Tarantino', 'The lives of two mob hitmen, a boxer, a gangster and his wife, and a pair of diner bandits intertwine in four tales of violence and redemption.', 'https://filmartgallery.com/cdn/shop/products/Pulp-Fiction-Vintage-Movie-Poster-Original-1-Sheet-27x41-6.jpg?v=1669266071', 8.9);
 
 INSERT INTO movie (title, year, director, description, image, avg_rating)
-VALUES ('Forrest Gump', 1994, 'Robert Zemeckis', 'The presidencies of Kennedy and Johnson, the events of Vietnam, Watergate and other historical events unfold from the perspective of an Alabama man with an IQ of 75, whose only desire is to be reunited with his childhood sweetheart.', 'forrest_gump.jpg', 8.8);
+VALUES ('Forrest Gump', 1994, 'Robert Zemeckis', 'The presidencies of Kennedy and Johnson, the events of Vietnam, Watergate and other historical events unfold from the perspective of an Alabama man with an IQ of 75, whose only desire is to be reunited with his childhood sweetheart.', 'https://m.media-amazon.com/images/S/pv-target-images/2d0c9e38968936e6711c7fb2bc7895b82d8bb9178b5a854e14dffa4b17b88487.jpg', 8.8);
 
 INSERT INTO movie (title, year, director, description, image, avg_rating)
-VALUES ('Inception', 2010, 'Christopher Nolan', 'A thief who steals corporate secrets through the use of dream-sharing technology is given the inverse task of planting an idea into the mind of a C.E.O.', 'inception.jpg', 8.8);
+VALUES ('Inception', 2010, 'Christopher Nolan', 'A thief who steals corporate secrets through the use of dream-sharing technology is given the inverse task of planting an idea into the mind of a C.E.O.', 'https://i.ebayimg.com/images/g/B8oAAOSw2fdg5A-h/s-l1200.jpg', 8.8);
 
 INSERT INTO movie (title, year, director, description, image, avg_rating)
-VALUES ('The Matrix', 1999, 'Lana Wachowski, Lilly Wachowski', 'A computer hacker learns from mysterious rebels about the true nature of his reality and his role in the war against its controllers.', 'matrix.jpg', 8.7);
+VALUES ('The Matrix', 1999, 'Lana Wachowski, Lilly Wachowski', 'A computer hacker learns from mysterious rebels about the true nature of his reality and his role in the war against its controllers.', 'https://m.media-amazon.com/images/M/MV5BNzQzOTk3OTAtNDQ0Zi00ZTVkLWI0MTEtMDllZjNkYzNjNTc4L2ltYWdlXkEyXkFqcGdeQXVyNjU0OTQ0OTY@._V1_.jpg', 8.7);
 
 INSERT INTO movie (title, year, director, description, image, avg_rating)
-VALUES ('Inglourious Basterds', 2009, 'Quentin Tarantino', 'In Nazi-occupied France during World War II, a plan to assassinate Nazi leaders by a group of Jewish U.S. soldiers coincides with a theatre owner''s vengeful plans for the same.', 'inglourious_basterds.jpg', 8.3);
+VALUES ('Inglourious Basterds', 2009, 'Quentin Tarantino', 'In Nazi-occupied France during World War II, a plan to assassinate Nazi leaders by a group of Jewish U.S. soldiers coincides with a theatre owner''s vengeful plans for the same.', 'https://m.media-amazon.com/images/M/MV5BOTJiNDEzOWYtMTVjOC00ZjlmLWE0NGMtZmE1OWVmZDQ2OWJhXkEyXkFqcGdeQXVyNTIzOTk5ODM@._V1_FMjpg_UX1000_.jpg', 8.3);
 
 INSERT INTO movie (title, year, director, description, image, avg_rating)
-VALUES ('The Departed', 2006, 'Martin Scorsese', 'An undercover cop and a mole in the police attempt to identify each other while infiltrating an Irish gang in South Boston.', 'the_departed.jpg', 8.5);
+VALUES ('The Departed', 2006, 'Martin Scorsese', 'An undercover cop and a mole in the police attempt to identify each other while infiltrating an Irish gang in South Boston.', 'https://resizing.flixster.com/-XZAfHZM39UwaGJIFWKAE8fS0ak=/v3/t/assets/p162564_p_v8_ag.jpg', 8.5);
 
 INSERT INTO movie (title, year, director, description, image, avg_rating)
-VALUES ('The Grand Budapest Hotel', 2014, 'Wes Anderson', 'A writer encounters the owner of an aging high-class hotel, who tells him of his early years serving as a lobby boy in the hotel''s glorious years under an exceptional concierge.', 'grand_budapest_hotel.jpg', 8.1);
+VALUES ('The Grand Budapest Hotel', 2014, 'Wes Anderson', 'A writer encounters the owner of an aging high-class hotel, who tells him of his early years serving as a lobby boy in the hotel''s glorious years under an exceptional concierge.', 'https://m.media-amazon.com/images/M/MV5BMzM5NjUxOTEyMl5BMl5BanBnXkFtZTgwNjEyMDM0MDE@._V1_FMjpg_UX1000_.jpg', 8.1);
 
 
 INSERT INTO movie_genres (movie_id, genre_id) VALUES (1, 1); --action
