@@ -1,8 +1,38 @@
-{{!this needs to be incorporated once the home pahe and navagation bar has been created}}
-{{!this will also be updated to make it look better and fit the theme of the rest of the website}}
-
-<html>
-    <h2><strong>You have logged out successfully!!</strong></h2>
-    <p>You will need to login again to see your information</p>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Logged Out</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .container {
+            text-align: center;
+        }
+        .login-button {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            text-decoration: none;
+        }
+    </style>
+</head>
+    <div class="container">
+        <h2><strong>You have logged out successfully!!</strong></h2>
+        <p>You will need to login again to see your information</p>
+    </div>
+    <a href="/login" class="login-button">Log In</a>
+</body>
 </html>
-
