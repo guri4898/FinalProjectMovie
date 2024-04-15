@@ -185,6 +185,7 @@ app.get("/movie/:title", (req, res) => {
   const query = `SELECT * FROM movie WHERE title = $1;`;
 
   db.one(query, [title])
+<<<<<<< HEAD
     .then(function (movie) {
       console.log({ movie });
       res
@@ -201,3 +202,58 @@ app.get("/movie/:title", (req, res) => {
         });
     });
 });
+=======
+  .then(function(movie){
+    console.log({movie});
+    res.status(200).render('pages/singleMovie', {movie,
+    display: true,
+    exists: true});
+  })
+  .catch(function(error){
+    res.status(500).render('pages/singleMovie', {error: true,
+    display: true,
+    exists: false});
+  });
+
+});
+
+app.get('/addMovie', (req, res) => {
+  res.render('pages/addMovie',{
+    display: true
+  });
+});
+
+app.post('/addMovie', async (req, res) => {
+
+  const title = req.body.title;
+  const year = req.body.year;
+  const genre = req.body.genre;
+  const director = req.body.director;
+  const description = req.body.description;
+  const defaultRating = 0;
+  const query = `INSERT INTO movie (title, year, avg_rating, director, description) VALUES ($1, $2, $3, $4, $5) returning movie_id;`;
+  const genreQuery = 'Select genre_id from genres where genre = $1;'
+  const movieToGenresQuery = 'INSERT INTO movie_genres (movie_id, genre_id) VALUES ($1, $2);'
+
+  const movieId = await db.one(query, [title, year, defaultRating, director, description]);
+  console.log(movieId);
+    if(movieId){
+      const genreId = await db.any(genreQuery, [genre]);
+      console.log(genreId);
+      db.none(movieToGenresQuery, [movieId.movie_id, genreId[0].genre_id])
+      .then(()=>{
+        res.status(200).render('pages/home',{
+          display: true
+        });
+
+      })
+      .catch(error =>{
+        res.status(500).render('pages/home',{
+          display: true,
+          error: true
+        });
+      })
+    }
+
+});
+>>>>>>> 3dc2e8f424868b1899535a0274ffebc2a5a1809c
