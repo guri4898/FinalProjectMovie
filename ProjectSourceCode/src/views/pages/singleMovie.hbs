@@ -3,29 +3,36 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Movie Review</title>
-    <!-- Bootstrap CSS -->
+    <title>{{movie.title}}</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 </head>
 <body>
+    {{#if exists}}
     <div class="container">
         <div class="row mt-5">
             <div class="col-md-6 offset-md-3">
                 <div class="card">
-                    <img src="{{movie.image}}" class="card-img-top" alt="Movie Poster">
+                  {{#if movie.image}}
+                        <img src="{{movie.image}}" class="card-img-top img-fluid" alt="Movie Poster">
+                    {{else}}
+                        <img src="../../../../resources/img/MovieMasterLogo.png" class="card-img-top img-fluid" alt="Movie Poster"> 
+                        {{!-- for now, just link to random image but find default image later --}}
+                    {{/if}}
                     <div class="card-body">
                         <h5 class="card-title">{{movie.title}}</h5>
                         <p class="card-text">Release Year: {{movie.year}}</p>
                         <p class="card-text">Director: {{movie.director}}</p>
                         <p class="card-text">Plot: {{movie.plot}}</p>
                         <p class="card-text">Rating: {{movie.rating}}/10</p>
-                        <p class="card-text">Reviews: {{movie.reviews.length}}</p>
+                        {{!-- <p class="card-text">Reviews: {{movie.reviews.length}}</p> --}}
                         <a href="#" class="btn btn-primary">Write a Review</a>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-
+    {{else}}
+    <h2>Sorry, Movie not found</h2>
+    {{/if}}
 </body>
 </html>

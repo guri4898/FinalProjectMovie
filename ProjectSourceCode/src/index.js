@@ -149,7 +149,7 @@ app.post('/login', (req, res) => {
       req.session.user = user;
       req.session.save();
       res.status(200);
-      res.render('pages/account_settings',{
+      res.render('pages/home',{
         display: true
       }); //need to redirect to api route that displays movies
     }
@@ -159,7 +159,7 @@ app.post('/login', (req, res) => {
       .render('pages/login', {
         message: 'Incorrect Password',
         error: true,
-        display: true
+        display: false
       });
     }
 
@@ -194,4 +194,26 @@ app.get('/logout', (req, res) => {
   req.session.destroy();
   res.status(200);
   res.render('pages/logout');
+});
+
+//display single movie
+
+app.get('/movie/:title', (req, res) => {
+
+  const title = req.params.title;
+  const query = `SELECT * FROM movie WHERE title = $1;`;
+
+  db.one(query, [title])
+  .then(function(movie){
+    console.log({movie});
+    res.status(200).render('pages/singleMovie', {movie,
+    display: true,
+    exists: true});
+  })
+  .catch(function(error){
+    res.status(500).render('pages/singleMovie', {error: true,
+    display: true,
+    exists: false});
+  });
+
 });
