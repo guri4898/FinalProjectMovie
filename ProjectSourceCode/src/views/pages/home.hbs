@@ -1,44 +1,73 @@
-<form action="/home" method="POST">
-    <br>
-    <div class="search-bar">
-        <form class="form-inline my-2 my-lg-0">
-            <div class="row">
-                <div class="col col-3">
-                </div>
-                <div class="col-7">
-                    <nav class="search-bar-1">
-                        <input class="form-control mr-sm-2" type="search" id = "searchQ" placeholder="Search" aria-label="Search">
-                    </nav>
-                </div>
-                <div class="col">
-                    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-                </div>
-            </div>
-        </form>
+<form action="/home" method="POST" class="form-inline my-2 my-lg-0">
+  <br>
+  <div class="search-bar">
+    <div class="row">
+      <div class="col col-3">
+      </div>
+      <div class="col-7">
+        <nav class="search-bar-1">
+          <input class="form-control mr-sm-2" type="search" id="searchQ" name="searchQ" placeholder="Search"
+            aria-label="Search">
+        </nav>
+      </div>
+      <div class="col">
+        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+      </div>
     </div>
+  </div>
 </form>
 
-<div class="container">
+
+{{!-- <div class="container">
   {{#if message}}
-    <div class="alert alert-danger">{{message}}</div>
+  <div class="alert alert-danger">{{message}}</div>
   {{/if}}
 
   <div class="row">
     {{#each results as |event|}}
-      <div class="col-md-4 mb-4">
-        <div class="card">
-          {{#if event.images}}
-            <img src="{{event.images.[0].url}}" class="card-img-top" alt="{{event.name}}">
-          {{else}}
-            <img src="path/to/default-image.jpg" class="card-img-top" alt="Default Image">
-          {{/if}}
-          <div class="card-body">
-            <h5 class="card-title">{{event.name}}</h5>
-            <p class="card-text">{{event.dates.start.localDate}} at {{event.dates.start.localTime}}</p>
-            <a href="{{event.url}}" class="btn btn-primary">Book Now</a>
-          </div>
+    <div class="col-md-4 mb-4">
+      <div class="card">
+        {{#if event.images}}
+        <img src="{{event.images.[0].url}}" class="card-img-top" alt="{{event.name}}">
+        {{else}}
+        <img src="path/to/default-image.jpg" class="card-img-top" alt="Default Image">
+        {{/if}}
+        <div class="card-body">
+          <h5 class="card-title">{{event.name}}</h5>
+          <p class="card-text">{{event.dates.start.localDate}} at {{event.dates.start.localTime}}</p>
+          <a href="{{event.url}}" class="btn btn-primary">Book Now</a>
         </div>
       </div>
+    </div>
     {{/each}}
   </div>
-</div>
+</div> --}}
+
+<br>
+{{#if searchedTF}}
+  {{#if noData}}
+    <div class="position-absolute top-50 start-50 translate-middle">
+      <h2>No Movies Found.</h2>
+      <button type="button" class="btn btn-outline-secondary d-block mx-auto mt-3" onclick="window.location.href='/home'">Go Back</button>
+    </div>
+  {{else}}
+    <div class="container">
+      <div class="row">
+        {{#each movies}}
+        <div class="col-lg-3 col-md-4 col-sm-6 mb-4">
+          <div class="card bg-dark text-white">
+            <img src="{{image}}" class="card-img" alt="...">
+            <div class="card-img-overlay">
+              <h5 class="card-title">{{title}}</h5>
+              <p class="card-text">Year: {{year}}</p>
+              <p class="card-text">Director: {{director}}</p>
+              <p class="card-text">Average Rating: {{avg_rating}}</p>
+            </div>
+          </div>
+        </div>
+      {{/each}}
+    </div>
+  </div>
+  </div>
+  {{/if}}
+{{/if}}
