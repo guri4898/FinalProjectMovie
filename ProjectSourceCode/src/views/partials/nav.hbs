@@ -44,7 +44,7 @@
   </style>
 </head>
 <body>
-
+{{#if display}}
 <header>
   <nav class="navbar navbar-expand-sm border-bottom">
     <div class="container">
@@ -66,13 +66,13 @@
         <div class="dropdown-content">
           <!-- Options for the user to select -->
           <!-- Not sure why it's not mapping to the account settings -->
-          <a href="./pages/account_settings.hbs">Account Settings</a>
+          <a href="/account_settings">Account Settings</a>
           <a href="/logout">Logout</a>
         </div>
       </div>
     </div>
   </nav>
 </header>
-
+{{/if}}
 </body>
 </html>

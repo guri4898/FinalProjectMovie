@@ -71,6 +71,9 @@ app.use(
   })
 );
 
+app.use('/resources', express.static(path.join(__dirname, 'resources')));
+app.use('/img', express.static(path.join(__dirname, 'img')));
+
 module.exports = app.listen(3000);
 
 
@@ -78,7 +81,6 @@ module.exports = app.listen(3000);
 app.get('/welcome', (req, res) => {
   res.json({status: 'success', message: 'Welcome!'});
 });
-
 
 
 // Register
@@ -115,11 +117,17 @@ app.get('/register', (req, res) => {
 });
 
 app.get('/account_settings', (req, res) => {
-  res.render('pages/account_settings');
+  res.render('pages/account_settings',{
+    display: true
+  });
 });
 
+
+
 app.get('/home', (req, res) => {
-  res.render('pages/home');
+  res.render('pages/home',{
+    display: true
+  });
 });
 
 app.post('/home', (req, res) => {
@@ -145,7 +153,9 @@ app.post('/home', (req, res) => {
 });
 
 app.get('/login', (req, res) => {
-  res.render('pages/login');
+  res.render('pages/login',{
+    display: false
+  });
 });
 
 app.post('/login', (req, res) => {
@@ -162,14 +172,17 @@ app.post('/login', (req, res) => {
       req.session.user = user;
       req.session.save();
       res.status(200);
-      res.render('pages/account_settings'); //need to redirect to api route that displays movies
+      res.render('pages/home',{
+        display: true
+      }); //need to redirect to api route that displays movies
     }
     else{
       //print incorrect password to user
       res.status(501)
       .render('pages/login', {
         message: 'Incorrect Password',
-        error: true
+        error: true,
+        display: false
       });
     }
 
@@ -184,12 +197,18 @@ app.post('/login', (req, res) => {
 
 });
 
+
+
 app.get('/', (req, res) => {
-  res.render('pages/image');
+  res.render('pages/image',{
+    display: false
+  });
 });
 
 app.get('/image', (req, res) => {
-  res.render('pages/image');
+  res.render('pages/image',{
+    display: false
+  });
 });
 
 
@@ -198,4 +217,66 @@ app.get('/logout', (req, res) => {
   req.session.destroy();
   res.status(200);
   res.render('pages/logout');
+});
+
+//display single movie
+
+app.get('/movie/:title', (req, res) => {
+
+  const title = req.params.title;
+  const query = `SELECT * FROM movie WHERE title = $1;`;
+
+  db.one(query, [title])
+  .then(function(movie){
+    console.log({movie});
+    res.status(200).render('pages/singleMovie', {movie,
+    display: true,
+    exists: true});
+  })
+  .catch(function(error){
+    res.status(500).render('pages/singleMovie', {error: true,
+    display: true,
+    exists: false});
+  });
+
+});
+
+app.get('/addMovie', (req, res) => {
+  res.render('pages/addMovie',{
+    display: true
+  });
+});
+
+app.post('/addMovie', async (req, res) => {
+
+  const title = req.body.title;
+  const year = req.body.year;
+  const genre = req.body.genre;
+  const director = req.body.director;
+  const description = req.body.description;
+  const defaultRating = 0;
+  const query = `INSERT INTO movie (title, year, avg_rating, director, description) VALUES ($1, $2, $3, $4, $5) returning movie_id;`;
+  const genreQuery = 'Select genre_id from genres where genre = $1;'
+  const movieToGenresQuery = 'INSERT INTO movie_genres (movie_id, genre_id) VALUES ($1, $2);'
+
+  const movieId = await db.one(query, [title, year, defaultRating, director, description]);
+  console.log(movieId);
+    if(movieId){
+      const genreId = await db.any(genreQuery, [genre]);
+      console.log(genreId);
+      db.none(movieToGenresQuery, [movieId.movie_id, genreId[0].genre_id])
+      .then(()=>{
+        res.status(200).render('pages/home',{
+          display: true
+        });
+
+      })
+      .catch(error =>{
+        res.status(500).render('pages/home',{
+          display: true,
+          error: true
+        });
+      })
+    }
+
 });
