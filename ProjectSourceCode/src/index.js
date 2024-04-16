@@ -131,28 +131,35 @@ app.get('/home', (req, res) => {
 });
 
 app.post('/home', (req, res) => {
+  let searchedTF = false;
+
   const origSearchedQuery = req.body.searchQ;
   let searchedQuer = '';
 
   if (origSearchedQuery && origSearchedQuery.trim() !== '') { //checks if search is empty
-      searchedQuer = origSearchedQuery.toLowerCase(); //converts to lowercase if it is
+    searchedTF = true;
+    searchedQuer = origSearchedQuery.toLowerCase(); //converts to lowercase if it is
   } else {
-      return res.render('pages/search', {
+      return res.render('pages/home', {
           noData: true
       });
   }
 
-  const query = 'SELECT * FROM movie WHERE title LIKE $1';
+  const query = 'SELECT * FROM movie WHERE LOWER(title) LIKE $1';
 
   db.any(query, [`%${searchedQuer}%`])
       .then(movies => {
           if (movies.length === 0) {
-              res.render('pages/search', {
-                  noData: true
+              res.render('pages/home', {
+                  noData: true,
+                  searchedTF: searchedTF,
+                  display: true
               });
           } else {
-              res.render('pages/search', {
-                  movies: movies
+              res.render('pages/home', {
+                  movies: movies,
+                  searchedTF: searchedTF,
+                  display: true
               });
           }
       })
