@@ -131,26 +131,41 @@ app.get('/home', (req, res) => {
 });
 
 app.post('/home', (req, res) => {
-    
-    const origSearchedQuery = req.body.searchQ;
-    const searchedQuer = origSearchedQuery.toLowerCase();
+  const origSearchedQuery = req.body.searchQ;
+  let searchedQuer = '';
 
-    const query = 'SELECT * FROM movie WHERE title LIKE %$1%';
-
-    db.any(query, [searchedQuer])
-    .then(movies => {
-      if (movies.length() == 0){
-        res.render('pages/home',{ //if no movies are found, meaning the length of the results is 0, then noData is returned as true, so in hbs it would check the conditional if noData is true
+  if (origSearchedQuery && origSearchedQuery.trim() !== '') { //checks if search is empty
+      searchedQuer = origSearchedQuery.toLowerCase(); //converts to lowercase if it is
+  } else {
+      return res.render('pages/search', {
           noData: true
-        })
-      }
-      else{
-        res.render('pages/home', {movies})
-      }
-    })
-    
+      });
+  }
 
+  const query = 'SELECT * FROM movie WHERE title LIKE $1';
+
+  db.any(query, [`%${searchedQuer}%`])
+      .then(movies => {
+          if (movies.length === 0) {
+              res.render('pages/search', {
+                  noData: true
+              });
+          } else {
+              res.render('pages/search', {
+                  movies: movies
+              });
+          }
+      })
+      .catch(error => {
+          res.status(500)
+              .render('pages/home', {
+                  error: true
+              });
+      });
 });
+
+
+
 
 app.get('/login', (req, res) => {
   res.render('pages/login',{
