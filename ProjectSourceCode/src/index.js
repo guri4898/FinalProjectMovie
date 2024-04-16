@@ -302,3 +302,42 @@ app.post('/addMovie', async (req, res) => {
     }
 
 });
+
+app.get('/addFriend', (req, res) => {
+  res.render('pages/addFriend',{
+    display: true
+  });
+});
+
+app.post('/addFriend', async (req, res) => {
+
+  const query = 'SELECT user_id FROM users WHERE username = $1;';
+  const usernameFriend = req.body.usernameSearch;
+
+  db.one(query, [usernameFriend])
+  .then((friendName)=>{
+
+    const query = 'INSERT INTO friends (user_id, friend_id) VALUES ($1, $2);';
+    db.none(query, [req.session.user.user_id, friendName.user_id])
+    .then(()=>{
+      res.status(200).render('pages/home',{
+        display: true
+
+      });
+    })
+    .catch(error =>{
+      res.status(500).render('pages/home',{
+        display: true,
+        error: true
+      });
+    });
+
+  })
+  .catch(error =>{
+    res.status(500).render('pages/home',{
+      display: true,
+      error: true
+    });
+  });
+
+});

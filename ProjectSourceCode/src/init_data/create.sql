@@ -53,6 +53,15 @@ CREATE TABLE movie_genres(
     FOREIGN KEY (genre_id) REFERENCES genres(genre_id)
 );
 
+DROP TABLE IF EXISTS friend CASCADE;
+CREATE TABLE friend(
+    user_id INT NOT NULL,
+    friend_id INT NOT NULL,
+    PRIMARY KEY (user_id, friend_id),
+    FOREIGN KEY (user_id) REFERENCES users(user_id),
+    FOREIGN KEY (friend_id) REFERENCES users(user_id)
+);
+
 --populating the genres table
 INSERT INTO genres (genre) VALUES ('Action');
 INSERT INTO genres (genre) VALUES ('Adventure');
