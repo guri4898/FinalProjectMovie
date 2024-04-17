@@ -105,7 +105,10 @@ app.post('/register', async (req, res) => {
     // 5. ends with one or more characters that are not whitespace or @
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/; 
     if (!emailRegex.test(req.body.email)) {
-      return res.status(400).json({ message: 'Invalid email format' });
+      res.render('pages/register', {
+        message: 'Invalid email format'
+      })
+      // return res.status(400).json({ message: 'Invalid email format' });
     }
 
     // check that the password has one or more lowercase letters
@@ -113,7 +116,9 @@ app.post('/register', async (req, res) => {
     // check that the password is at least 8 characters long
     const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z]).{8,}$/;
     if (!passwordRegex.test(req.body.password)) {
-      return res.status(400).json({ message: 'Password must be at least 8 characters long and contain at least one uppercase and one lowercase letter' });
+      res.render('pages/register', {
+        message: 'Password must be at least 8 characters long and contain at least one uppercase and one lowercase letter'
+      });
     }
 
 
@@ -219,20 +224,15 @@ app.post('/login', (req, res) => {
     }
     else{
       //print incorrect password to user
-      res.status(501)
-      .render('pages/login', {
-        message: 'Incorrect Password',
-        error: true,
-        display: false
+      res.render('pages/login', {
+        message: 'Incorrect Password. Try again.',
       });
     }
 
   })
   .catch(function(error){
-    res.status(500)
-    .render('pages/register', {
-      error: true,
-      message: 'User does not exist'
+    res.render('pages/login', {
+      message: `That username doesn't exist. Try again or register.`,
     });
   });
 
