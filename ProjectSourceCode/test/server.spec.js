@@ -4,11 +4,11 @@ const server = require('../src/index.js'); //TODO: Make sure the path to your in
 
 // ********************** Import Libraries ***********************************
 
-const chai = require('chai'); // Chai HTTP provides an interface for live integration testing of the API's.
+const chai = require('chai');
 const chaiHttp = require('chai-http');
-chai.should();
+const server = require('../src/index.js');  
 chai.use(chaiHttp);
-const {assert, expect} = chai;
+const expect = chai.expect;
 
 // ********************** DEFAULT WELCOME TESTCASE ****************************
 
@@ -143,3 +143,22 @@ describe('Login with failed credentials', () => {
       });
   })
 });
+
+// server.js
+app.post('/search', (req, res) => {
+  const searchQuery = req.body.searchQ;
+
+  // MySQL LIKE query with placeholders for prevention against SQL injection
+  db.query("SELECT * FROM movies WHERE title LIKE ?", ['%' + searchQuery + '%'], (error, movies) => {
+    if (error) {
+      console.error('Error during search:', error);
+      res.status(500).render('home', { message: 'Error performing search', searchedTF: true });
+    } else if (movies.length > 0) {
+      res.render('home', { movies, searchedTF: true });
+    } else {
+      res.render('home', { noData: true, searchedTF: true });
+    }
+  });
+});
+
+
