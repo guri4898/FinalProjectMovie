@@ -105,7 +105,7 @@ app.post('/register', async (req, res) => {
     // 5. ends with one or more characters that are not whitespace or @
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/; 
     if (!emailRegex.test(req.body.email)) {
-      res.render('pages/register', {
+      return res.render('pages/register', {
         message: 'Invalid email format'
       })
       // return res.status(400).json({ message: 'Invalid email format' });
@@ -116,7 +116,7 @@ app.post('/register', async (req, res) => {
     // check that the password is at least 8 characters long
     const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z]).{8,}$/;
     if (!passwordRegex.test(req.body.password)) {
-      res.render('pages/register', {
+      return res.render('pages/register', {
         message: 'Password must be at least 8 characters long and contain at least one uppercase and one lowercase letter'
       });
     }
@@ -129,8 +129,8 @@ app.post('/register', async (req, res) => {
     res.status(200).render('pages/login'); 
     
   } catch(err){
-    res.status(500).json({message: 'Invalid input'});
     console.log(err);
+    res.status(500).json({message: 'Invalid input'});
   }
 });
 
