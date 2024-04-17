@@ -75,11 +75,10 @@
 <div id="movieCarousel" class="carousel carousel-dark slide" data-bs-ride="carousel">
   <!-- Carousel indicators -->
   <div class="carousel-indicators">
-    {{#each movies in chunks of 4}}
+    {{#each movies in chunks of 4}} !Pseudo code for th e
     <button type="button" data-bs-target="#movieCarousel" data-bs-slide-to="{{@index}}" class="{{#if @first}}active{{/if}}" aria-label="Slide {{add @index 1}}"></button>
     {{/each}}
   </div>
-
   <!-- Carousel inner content: movie cards -->
   <div class="carousel-inner">
     {{#each movies in chunks of 4}}
