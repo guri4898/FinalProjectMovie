@@ -7,15 +7,14 @@
     <div style="margin-top: 10%;">
         <form action="/update_account" method="UPDATE" style="margin-right: 100px;">
             <h2 style="font-size: x-large; color: rgb(251, 200, 207);">Username</h2>
-            <input value="Display current username" name="username" type="text" style="border-radius: 7px; border-width: 0px; padding: 6px; width: 100%;">
-            {{{username}}}
+            <input value="{{username}}" name="username" type="text" style="border-radius: 7px; border-width: 0px; padding: 6px; width: 100%;">
             <br>
             <br>
             <h2 style="font-size: x-large; color: rgb(251, 200, 207);">Email</h2>
-            <p style="border: 0px; border-radius: 7px; padding: 6px; width: 100%; box-sizing: border-box; background-color: white;">Email will be displayed here</p>
+            <p style="border: 0px; border-radius: 7px; padding: 6px; width: 100%; box-sizing: border-box; background-color: white;">{{email}}</p>
             <br>
             {{!-- Make the save button work --}}
-            <input type="submit" value="Save" style="background-color: rgb(0, 95, 249); color:aliceblue; border-radius: 5px; border-width: 0px;"> 
+            <input action="/account_settings" method="PATCH" type="submit" value="Save" style="background-color: rgb(0, 95, 249); color:aliceblue; border-radius: 5px; border-width: 0px;"> 
         </form>
     </div>
 </div>

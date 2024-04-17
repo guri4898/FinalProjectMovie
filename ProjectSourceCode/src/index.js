@@ -140,7 +140,9 @@ app.get('/register', (req, res) => {
 
 app.get('/account_settings', (req, res) => {
   res.render('pages/account_settings',{
-    display: true
+    display: true,
+    username : req.session.user.username,
+    email: req.session.user.email
   });
 });
 
