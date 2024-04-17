@@ -148,6 +148,45 @@ app.get('/account_settings', (req, res) => {
 
 
 
+app.post('/account_settings', async (req, res) => {
+
+  try{
+    const username = req.body.username;
+    // if the user is trying to set its username to an empty string
+    if (!username){
+      return res.status(500).render('pages/account_settings', {
+        display: true,
+        message: 'The user cannot be empty. Try again.',
+        username: req.session.user.username,
+        email: req.session.user.email
+      });
+    }
+
+    if (username === req.session.user.username){
+      return res.status(500).render('pages/account_settings', {
+        display: true,
+        message: 'The new username is the same as the current one. Try again.',
+        username: req.session.user.username,
+        email: req.session.user.email
+      });
+    }
+
+    updateQuery = `UPDATE users SET username = '${username}' WHERE user_id = ${req.session.user.user_id}`;
+    await db.none(updateQuery);
+    res.status(200).render('pages/account_settings', {
+      display: true,
+      message: 'Username updated successfully',
+      username: username,
+      email: req.session.user.email,
+      isGreen: true
+    });
+  } catch(err){
+    console.log(err);
+    res.status(500).json({message: 'Invalid input'});
+  }
+});
+
+
 app.get('/home', (req, res) => {
   res.render('pages/home',{
     display: true,
