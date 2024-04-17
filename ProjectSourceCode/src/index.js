@@ -148,11 +148,13 @@ app.get('/account_settings', (req, res) => {
 
 app.get('/home', (req, res) => {
   res.render('pages/home',{
-    display: true
+    display: true,
+    searchedTF: false
   });
 });
 
 app.post('/home', (req, res) => {
+
   let searchedTF = false;
 
   const origSearchedQuery = req.body.searchQ;
@@ -174,13 +176,13 @@ app.post('/home', (req, res) => {
           if (movies.length === 0) {
               res.render('pages/home', {
                   noData: true,
-                  searchedTF: searchedTF,
+                  searchedTF: true,
                   display: true
               });
           } else {
               res.render('pages/home', {
                   movies: movies,
-                  searchedTF: searchedTF,
+                  searchedTF: true,
                   display: true
               });
           }
