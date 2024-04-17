@@ -71,3 +71,47 @@
   </div>
   {{/if}}
 {{/if}}
+
+<div id="movieCarousel" class="carousel carousel-dark slide" data-bs-ride="carousel">
+  <!-- Carousel indicators -->
+  <div class="carousel-indicators">
+    {{#each movies in chunks of 4}}
+    <button type="button" data-bs-target="#movieCarousel" data-bs-slide-to="{{@index}}" class="{{#if @first}}active{{/if}}" aria-label="Slide {{add @index 1}}"></button>
+    {{/each}}
+  </div>
+
+  <!-- Carousel inner content: movie cards -->
+  <div class="carousel-inner">
+    {{#each movies in chunks of 4}}
+    <div class="carousel-item {{#if @first}}active{{/if}}">
+      <div class="container">
+        <div class="row">
+          {{#each this}}
+          <div class="col-md-3">
+            <div class="card bg-dark text-white" style="width: 100%;">
+              <img src="{{image}}" class="card-img" alt="{{title}}">
+              <div class="card-img-overlay">
+                <h5 class="card-title">{{title}}</h5>
+                <p class="card-text">Year: {{year}}</p>
+                <p class="card-text">Director: {{director}}</p>
+                <p class="card-text">Average Rating: {{avg_rating}}</p>
+              </div>
+            </div>
+          </div>
+          {{/each}}
+        </div>
+      </div>
+    </div>
+    {{/each}}
+  </div>
+
+  <!-- Carousel controls -->
+  <button class="carousel-control-prev" type="button" data-bs-target="#movieCarousel" data-bs-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Previous</span>
+  </button>
+  <button class="carousel-control-next" type="button" data-bs-target="#movieCarousel" data-bs-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Next</span>
+  </button>
+</div>
