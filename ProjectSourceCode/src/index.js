@@ -96,11 +96,35 @@ app.post('/register', async (req, res) => {
       throw new Error('Invalid input');
     }
 
-    console.log("username", username);
-    console.log("email", email);
-    console.log("password", hash);
 
-    // To-DO: Insert username and hashed password into the 'users' table
+    // check that thet email is in the correct format
+    // 1. check that email begins with one or more characters that are not whitespace or @
+    // 2. followed by an @
+    // 3. followed by one or more characters that are not whitespace or @
+    // 4. followed by a .
+    // 5. ends with one or more characters that are not whitespace or @
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/; 
+    if (!emailRegex.test(req.body.email)) {
+      res.render('pages/register', {
+        message: 'Invalid email format'
+      })
+      // return res.status(400).json({ message: 'Invalid email format' });
+    }
+
+    // check that the password has one or more lowercase letters
+    // check that the password has one or more uppercase letters
+    // check that the password is at least 8 characters long
+    const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z]).{8,}$/;
+    if (!passwordRegex.test(req.body.password)) {
+      res.render('pages/register', {
+        message: 'Password must be at least 8 characters long and contain at least one uppercase and one lowercase letter'
+      });
+    }
+
+
+    
+
+    //  Insert username and hashed password into the 'users' table
     const insertNewUserQuery = `INSERT INTO users (username, password, email) VALUES ('${username}', '${hash}', '${email}')`;
     await db.none(insertNewUserQuery);
 
@@ -200,20 +224,15 @@ app.post('/login', (req, res) => {
     }
     else{
       //print incorrect password to user
-      res.status(501)
-      .render('pages/login', {
-        message: 'Incorrect Password',
-        error: true,
-        display: false
+      res.render('pages/login', {
+        message: 'Incorrect Password. Try again.',
       });
     }
 
   })
   .catch(function(error){
-    res.status(500)
-    .render('pages/register', {
-      error: true,
-      message: 'User does not exist'
+    res.render('pages/login', {
+      message: `That username doesn't exist. Try again or register.`,
     });
   });
 
