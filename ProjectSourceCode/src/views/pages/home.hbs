@@ -1,96 +1,89 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <!-- Head content, including Bootstrap CSS links -->
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.1.3/js/bootstrap.bundle.min.js"></script>
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
-</head>
-<body>
-
-  <!-- Search form -->
-  <form action="/search" method="POST" class="form-inline my-2 my-lg-0">
-    <div class="search-bar">
-      <div class="row">
-        <div class="col col-3">
-          
-        </div>
-        <div class="col-7">
-          <input class="form-control mr-sm-2" type="search" id="searchQ" name="searchQ" placeholder="Search" aria-label="Search">
-        </div>
-        <div class="col">
-          <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-        </div>
-      </div>
-    </div>
-  </form>
-  
+<form action="/home" method="POST" class="form-inline my-2 my-lg-0">
   <br>
-
-  <!-- Conditionally display message or search results -->
-  {{#if searchedTF}}
-    {{#if noData}}
-      <div class="position-absolute top-50 start-50 translate-middle">
-        <h2>No Movies Found.</h2>
-        <button type="button" class="btn btn-outline-secondary d-block mx-auto mt-3" onclick="window.location.href='/home'">Go Back</button>
+  <div class="search-bar">
+    <div class="row">
+      <div class="col col-3">
       </div>
-    {{else}}
-      <div class="container">
-        <div class="row">
-          {{#each movies}}
-            <div class="col-lg-3 col-md-4 col-sm-6 mb-4">
-              <div class="card bg-dark text-white">
-                <img src="{{this.image}}" class="card-img" alt="{{this.title}}">
-                <div class="card-img-overlay">
-                  <h5 class="card-title">{{this.title}}</h5>
-                  <p class="card-text">Year: {{this.year}}</p>
-                  <p class="card-text">Director: {{this.director}}</p>
-                  <p class="card-text">Average Rating: {{this.avg_rating}}</p>
-                </div>
-              </div>
-            </div>
-          {{/each}}
-        </div>
+      <div class="col-7">
+        <nav class="search-bar-1">
+          <input class="form-control mr-sm-2" type="search" id="searchQ" name="searchQ" placeholder="Search"
+            aria-label="Search">
+        </nav>
       </div>
-    {{/if}}
-  {{else}}
-    <!-- Carousel code -->
-      <div id="movieCarousel" class="carousel slide" data-bs-ride="carousel">
-    <!-- Indicators -->
-    <ol class="carousel-indicators">
-      {{#each movies}}
-        <li data-bs-target="#movieCarousel" data-bs-slide-to="{{@index}}" class="{{#if @first}}active{{/if}}"></li>
-      {{/each}}
-    </ol>
-
-    <!-- Wrapper for slides -->
-    <div class="carousel-inner">
-      {{#each movies}}
-        <div class="carousel-item {{#if @first}}active{{/if}}">
-          <img src="{{this.imageUrl}}" class="d-block w-100" alt="{{this.title}}">
-          <div class="carousel-caption d-none d-md-block">
-            <h5>{{this.title}}</h5>
-            <p>{{this.summary}}</p>
-          </div>
-        </div>
-      {{/each}}
+      <div class="col">
+        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+      </div>
     </div>
-
-    <!-- Controls -->
-    <a class="carousel-control-prev" href="#movieCarousel" role="button" data-bs-slide="prev">
-      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-      <span class="visually-hidden">Previous</span>
-    </a>
-    <a class="carousel-control-next" href="#movieCarousel" role="button" data-bs-slide="next">
-      <span class="carousel-control-next-icon" aria-hidden="true"></span>
-      <span class="visually-hidden">Next</span>
-    </a>
   </div>
-  {{/if}}
+</form>
 
-  <!-- Carousel structure would go here -->
-  <div id="movieCarousel" class="carousel slide" data-bs-ride="carousel">
+<br>
+{{#if searchedTF}}
+{{#if noData}}
+<div class="position-absolute top-50 start-50 translate-middle">
+  <h2>No Movies Found.</h2>
+  <button type="button" class="btn btn-outline-secondary d-block mx-auto mt-3" onclick="window.location.href='/home'">Go
+    Back</button>
+</div>
+{{else}}
+<div class="container">
+  <div class="row">
+    {{#each movies}}
+    <div class="col-lg-3 col-md-4 col-sm-6 mb-4">
+      <div class="card bg-dark text-white">
+        <img src="{{image}}" class="card-img" alt="...">
+        <div class="card-img-overlay">
+          <h5 class="card-title">{{title}}</h5>
+          <p class="card-text">Year: {{year}}</p>
+          <p class="card-text">Director: {{director}}</p>
+          <p class="card-text">Average Rating: {{avg_rating}}</p>
+        </div>
+      </div>
+    </div>
+    {{/each}}
+  </div>
+</div>
+</div>
+{{/if}}
+
+{{else}}
+<!-- Carousel code -->
+<div id="movieCarousel" class="carousel slide" data-bs-ride="carousel">
+  <!-- Indicators -->
+  <ol class="carousel-indicators">
+    {{#each movies}}
+    <li data-bs-target="#movieCarousel" data-bs-slide-to="{{@index}}" class="{{#if @first}}active{{/if}}"></li>
+    {{/each}}
+
+  </ol>
+
+  <!-- Wrapper for slides -->
+  <div class="carousel-inner">
+    {{#each movies}}
+    <div class="carousel-item {{#if @first}}active{{/if}}">
+      <img src="{{this.imageUrl}}" class="d-block w-100" alt="{{this.title}}">
+      <div class="carousel-caption d-none d-md-block">
+        <h5>{{this.title}}</h5>
+        <p>{{this.summary}}</p>
+      </div>
+    </div>
+    {{/each}}
+  </div>
+
+  <!-- Controls -->
+  <a class="carousel-control-prev" href="#movieCarousel" role="button" data-bs-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Previous</span>
+  </a>
+  <a class="carousel-control-next" href="#movieCarousel" role="button" data-bs-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Next</span>
+  </a>
+</div>
+{{!-- {{/if}} --}}
+
+<!-- Carousel structure would go here -->
+<div id="movieCarousel" class="carousel slide" data-bs-ride="carousel">
   <!-- Carousel indicators -->
   <ol class="carousel-indicators">
     <li data-bs-target="#movieCarousel" data-bs-slide-to="0" class="active"></li>
@@ -126,18 +119,14 @@
     </div>
   </div>
 
-    <!-- Carousel controls -->
-    <a class="carousel-control-prev" href="#movieCarousel" role="button" data-bs-slide="prev">
-      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-      <span class="visually-hidden">Previous</span>
-    </a>
-    <a class="carousel-control-next" href="#movieCarousel" role="button" data-bs-slide="next">
-      <span class="carousel-control-next-icon" aria-hidden="true"></span>
-      <span class="visually-hidden">Next</span>
-    </a>
-  </div>
-
-  <!-- Bootstrap JS and dependencies -->
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.1.3/js/bootstrap.bundle.min.js"></script>
-</body>
-</html>
+  <!-- Carousel controls -->
+  <a class="carousel-control-prev" href="#movieCarousel" role="button" data-bs-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Previous</span>
+  </a>
+  <a class="carousel-control-next" href="#movieCarousel" role="button" data-bs-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Next</span>
+  </a>
+</div>
+{{/if}}
