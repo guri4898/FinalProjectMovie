@@ -122,8 +122,6 @@ app.post('/register', async (req, res) => {
     }
 
 
-    
-
     //  Insert username and hashed password into the 'users' table
     const insertNewUserQuery = `INSERT INTO users (username, password, email) VALUES ('${username}', '${hash}', '${email}')`;
     await db.none(insertNewUserQuery);
@@ -224,6 +222,7 @@ app.post('/login', (req, res) => {
     }
     else{
       //print incorrect password to user
+      res.status(500);
       res.render('pages/login', {
         message: 'Incorrect Password. Try again.',
       });
@@ -231,6 +230,7 @@ app.post('/login', (req, res) => {
 
   })
   .catch(function(error){
+    res.status(500);
     res.render('pages/login', {
       message: `That username doesn't exist. Try again or register.`,
     });
@@ -343,7 +343,7 @@ app.post('/addFriend', async (req, res) => {
         display: true
 
       });
-    })
+    })   
     .catch(error =>{
       res.status(500).render('pages/home',{
         display: true,
