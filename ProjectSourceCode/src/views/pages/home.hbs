@@ -1,11 +1,20 @@
 <style>
   body{
     background-color: #281543; 
+    overflow: auto;
   }
+  html{
+  height: 100%;
+  overflow-y: auto;  // Ensures you can scroll vertically
+}
   .sidebar-header {
   padding: 10px;
   font-size: 20px;
   font-weight: bold;
+}
+.bg-light {
+  background-color: #11091c !important;
+  overflow-y: auto;
 }
 
 .sidebar-btn {
@@ -14,7 +23,6 @@
 }
 
 .fixed-sidebar {
-  background-color: #281543; 
   position: fixed;
   top: 0;
   bottom: 0;
@@ -49,16 +57,16 @@
     <div class="col-md-3">
       <div class="p-3 bg-light" style="height: 100vh;width:200px; position: fixed;">
         <!-- Sidebar Content -->
-        <h4 class="mb-3">Filter </h4>
+        <h4 class="mb-3" style="color:white;">Filter </h4>
 
         <!-- Filter Category 1 -->
-        <h5 class="mt-4">Category 1</h5>
+        <h5 class="mt-4" style="color:white;">Genre</h5>
         <button class="btn btn-outline-secondary my-2 w-100" type="button">Option 1</button>
         <button class="btn btn-outline-secondary my-2 w-100" type="button">Option 2</button>
         <button class="btn btn-outline-secondary my-2 w-100" type="button">Option 3</button>
 
         <!-- Filter Category 2 -->
-        <h5 class="mt-4">Category 2</h5>
+        <h5 class="mt-4" style="color:white;">Year</h5>
         <button class="btn btn-outline-secondary my-2 w-100" type="button">Option 1</button>
         <button class="btn btn-outline-secondary my-2 w-100" type="button">Option 2</button>
         <button class="btn btn-outline-secondary my-2 w-100" type="button">Option 3</button>
