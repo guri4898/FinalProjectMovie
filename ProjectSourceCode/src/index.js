@@ -403,3 +403,47 @@ app.post('/addFriend', async (req, res) => {
   });
 
 });
+
+
+app.post('/rateMovie', async (req, res) => {
+  
+  try{
+
+    const review = req.body.review;
+    let rating;
+    let spoiler = false;
+
+    if (!req.body.rate) { // if the rate is undefined then it's 0
+      rating = 0;
+    } else {
+      rating = req.body.rate;
+    }
+    
+    if (req.body.spoiler === 'on'){ // if the spoiler is 'on' set the spoiler to true
+      spoiler = true;
+    } else {
+      spoiler = false;
+    }
+
+    
+    // if a review has been written add it to the reivew table
+    if (review){
+      // store the information at the review table
+    }
+    
+
+    console.log(review);
+    console.log(rating);
+    console.log(spoiler);
+
+    res.render('pages/:title', {
+      movie,
+      display: true,
+      exists: true
+    });
+
+  } catch(err) {
+
+  }
+
+});
