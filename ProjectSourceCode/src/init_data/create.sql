@@ -24,6 +24,7 @@ CREATE TABLE reviews (
     movie_id INTEGER NOT NULL,
     user_id INTEGER NOT NULL,
     review TEXT NOT NULL,
+    spoiler INTEGER NOT NULL,
     FOREIGN KEY (movie_id) REFERENCES movie(movie_id),
     FOREIGN KEY (user_id) REFERENCES users(user_id)
 );
