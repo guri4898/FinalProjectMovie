@@ -411,7 +411,7 @@ app.post('/rateMovie', async (req, res) => {
 
     const review = req.body.review;
     let rating;
-    let spoiler = false;
+    let spoiler = 0;
 
     if (!req.body.rate) { // if the rate is undefined then it's 0
       rating = 0;
@@ -420,9 +420,9 @@ app.post('/rateMovie', async (req, res) => {
     }
     
     if (req.body.spoiler === 'on'){ // if the spoiler is 'on' set the spoiler to true
-      spoiler = true;
+      spoiler = 1;
     } else {
-      spoiler = false;
+      spoiler = 0;
     }
 
     
