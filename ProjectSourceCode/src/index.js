@@ -379,18 +379,20 @@ app.post('/addFriend', async (req, res) => {
   db.one(query, [usernameFriend])
   .then((friendName)=>{
 
-    const query = 'INSERT INTO friends (user_id, friend_id) VALUES ($1, $2);';
+    const query = 'INSERT INTO friend (user_id, friend_id) VALUES ($1, $2);';
     db.none(query, [req.session.user.user_id, friendName.user_id])
     .then(()=>{
       res.status(200).render('pages/home',{
-        display: true
-
+        display: true,
+        message: 'Friend added successfully',
+        isGreen: true
       });
     })   
     .catch(error =>{
       res.status(500).render('pages/home',{
         display: true,
-        error: true
+        error: true,
+        message: 'Could not add friend, try again'
       });
     });
 
@@ -398,7 +400,8 @@ app.post('/addFriend', async (req, res) => {
   .catch(error =>{
     res.status(500).render('pages/home',{
       display: true,
-      error: true
+      error: true,
+      message: 'That user does not exist'
     });
   });
 
