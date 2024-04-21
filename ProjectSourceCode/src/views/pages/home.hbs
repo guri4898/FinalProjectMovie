@@ -52,27 +52,21 @@
 <br>
 <div class="container-fluid">
   <div class="row">
+
     <!-- Sidebar Column -->
     <div class="col-md-3">
       <div class="p-3 bg-light" style="height: 100vh;width:200px; position: fixed;">
         <!-- Sidebar Content -->
-        <h4 class="mb-3" style="color:white;">Filter </h4>
-
-        <!-- Filter Category 1 -->
-        <h5 class="mt-4" style="color:white;">Genre</h5>
-        <button class="btn btn-outline-secondary my-2 w-100" type="button">Option 1</button>
-        <button class="btn btn-outline-secondary my-2 w-100" type="button">Option 2</button>
-        <button class="btn btn-outline-secondary my-2 w-100" type="button">Option 3</button>
-
-        <!-- Filter Category 2 -->
-        <h5 class="mt-4" style="color:white;">Year</h5>
-        <button class="btn btn-outline-secondary my-2 w-100" type="button">Option 1</button>
-        <button class="btn btn-outline-secondary my-2 w-100" type="button">Option 2</button>
-        <button class="btn btn-outline-secondary my-2 w-100" type="button">Option 3</button>
-      </div>
-    </div>
-
+        <h4 class="mb-3" style="color:white;font-size: 40px;">Filter </h4>
         <div class="col-md-9 offset-md-3">
+        <!-- Filter Category 1 -->
+        {{> filter}}
+
+</div>
+</div>
+
+
+
 
 {{#if searchedTF}}
 {{#if noData}}
@@ -98,7 +92,7 @@
 
 {{else}}
 <!-- Carousel code -->
-<div id="movieCarousel" class="carousel slide" data-bs-ride="carousel">
+<div id="movieCarousel" class="carousel slide" data-bs-ride="carousel" style="padding-left: 500px;">
   <!-- Indicators -->
   <ol class="carousel-indicators">
     {{#each movies}}
@@ -132,6 +126,7 @@
 </div>
 {{!-- {{/if}} --}}
 
+<div>
 <!-- Carousel structure would go here -->
 <div id="movieCarousel" class="carousel slide" data-bs-ride="carousel">
   <!-- Carousel indicators -->
@@ -178,6 +173,7 @@
     <span class="carousel-control-next-icon" aria-hidden="true"></span>
     <span class="visually-hidden">Next</span>
   </a>
+</div>
 </div>
 {{/if}}
 </div>
