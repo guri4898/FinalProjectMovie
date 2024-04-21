@@ -355,6 +355,7 @@ app.get('/movie/:title', (req, res) => {
   .then(function(movie){
     console.log({movie});
     res.status(200).render('pages/singleMovie', {movie,
+      movieID: movie.movie_id,
     display: true,
     exists: true});
   })
@@ -451,43 +452,74 @@ app.post('/addFriend', async (req, res) => {
 
 app.post('/rateMovie', async (req, res) => {
   
+
+  // NOTE: IF YOU RECEIVE THE FOLLOWING ERROR: TypeError: Cannot read properties of undefined (reading 'user_id')
+  // YOU HAVE TO LOGIN FIRST/AGAIN
   try{
 
     const review = req.body.review;
-    let rating;
+    const movieID = req.body.movieID;
+    // const movie = req.body.movie;
+    const user_id = req.session.user.user_id;
+    let rating = 0;
     let spoiler = 0;
 
+    // check for inputs
     if (!req.body.rate) { // if the rate is undefined then it's 0
       rating = 0;
     } else {
       rating = req.body.rate;
     }
-    
+    // check for inputs
     if (req.body.spoiler === 'on'){ // if the spoiler is 'on' set the spoiler to true
       spoiler = 1;
     } else {
       spoiler = 0;
     }
 
-    
-    // if a review has been written add it to the reivew table
+    // console logs to see what is happening
+    console.log("moveID:", movieID)
+    console.log("review:", review);
+    console.log("rating:", rating);
+    console.log("spoiler(1/0):", spoiler);
+
+    // this query will insert the rating into the ratings tables
+    const reviewQuery = `INSERT INTO reviews (movie_id, user_id, review, spoiler) VALUES ('${movieID}', '${user_id}', '${review}', '${spoiler}')`;
+    // if a review has been written add it to the reivew table if not, no need to add it
     if (review){
-      // store the information at the review table
+      await db.none(reviewQuery);
+
+      // test if the insert has been successful (it works)
+      const testQuery = `SELECT * FROM reviews WHERE review = '${review}'`; // this query will get the review fromt the reviews table
+      const test = await db.any(testQuery);
+      console.log("output of the test:", test);
     }
+
+    // insert the rating to the ratings table
+    const ratingQuery = `INSERT INTO rating (movie_id, user_id, rating) VALUES ('${movieID}', '${user_id}', '${rating}')`;
+    await db.none(ratingQuery);
+
+    // check that the rating has been inserted correctly (it works)
+    const testRatingQuery = `SELECT * FROM rating WHERE rating = '${rating}'`; // this query will get the rating from the ratings table
+    const testRating = await db.any(testRatingQuery);
+    console.log("output of the testRating:", testRating);
+
+    // get the movie to render the page again
+    // this is necessary because for some reason, the movie variable declared above (now commented was appearing as undefined)
+    const getMovieQuery = `SELECT * FROM movie WHERE movie_id = ${movieID}`;
+    const movieRender = await db.one(getMovieQuery);
     
-
-    console.log(review);
-    console.log(rating);
-    console.log(spoiler);
-
-    res.render('pages/:title', {
-      movie,
+    // if no errors render the movie page again
+    res.status(200).render('pages/singleMovie', {
+      movieRender,
+      movieID: movieRender.movie_id,
       display: true,
-      exists: true
-    });
+      exists: true});
 
   } catch(err) {
-
+    console.log(err);
+    res.status(500).render('pages/singleMovie', {error: true,
+      display: true,
+      exists: false});
   }
-
 });
