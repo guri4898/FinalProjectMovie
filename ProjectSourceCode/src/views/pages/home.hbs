@@ -44,10 +44,16 @@
     .search-bar form {
         display: flex;
         justify-content: center;
-        margin-bottom: 20px;
+        margin-bottom: 35px;
+        margin-left: 20px;
     }
     .search-bar input[type="search"], .search-bar button {
-        flex: 1;
+        flex: 2;
+        margin-right: 15px;
+    }
+    .search-bar button {
+        flex: .5; /* change size */
+        margin-left: 15px;
     }
     .container {
         max-width: 960px;
@@ -109,7 +115,9 @@
   </a>
 </div>
 {{else}}
-<p>No movies to display</p>
+<div style="text-align: center">
+  <p>No movies to display</p>
+</div>
 {{/if}}
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
