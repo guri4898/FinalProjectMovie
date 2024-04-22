@@ -199,10 +199,10 @@
   app.get('/home', async (req, res) => {
     try {
       const randomMoviesQuery = 'SELECT * FROM movie ORDER BY RANDOM() LIMIT 5'; // Adjust limit as needed
-      const randomMovies = await db.any(randomMoviesQuery);
+      const movies = await db.any(randomMoviesQuery);
   
       res.render('pages/home', {
-        movies: randomMovies,
+        movies,
         searchedTF: false,
         display: true
       });
