@@ -362,14 +362,31 @@
 
     const title = req.params.title;
     const query = `SELECT * FROM movie WHERE title = $1;`;
+    console.log({title});
 
     db.one(query, [title])
     .then(function(movie){
       console.log({movie});
-      res.status(200).render('pages/singleMovie', {movie,
+
+      const getReviews = `SELECT * FROM reviews WHERE movie_id = $1;`;
+
+      db.any(getReviews, [movie.movie_id])
+      .then(function(reviewList){
+
+        console.log({reviewList});
+        res.status(200).render('pages/singleMovie', {movie,
         movieID: movie.movie_id,
-      display: true,
-      exists: true});
+        reviewList,
+        display: true,
+        exists: true});
+      })
+      .catch(function(error){
+        res.status(200).render('pages/singleMovie', {movie,
+        movieID: movie.movie_id,
+        display: true,
+        exists: true});
+      })
+
     })
     .catch(function(error){
       res.status(500).render('pages/singleMovie', {error: true,
@@ -522,11 +539,13 @@
       const movieRender = await db.one(getMovieQuery);
       
       // if no errors render the movie page again
-      res.status(200).render('pages/singleMovie', {
-        movieRender,
-        movieID: movieRender.movie_id,
-        display: true,
-        exists: true});
+      // res.status(200).redirect('movie/${req.body.title}', {
+      //   movieRender,
+      //   movieID: movieRender.movie_id,
+      //   display: true,
+      //   exists: true});
+      console.log("movie title in rateMovie:", movieRender.title);
+        res.status(200).redirect(`movie/${movieRender.title}`)
 
     } catch(err) {
       console.log(err);
