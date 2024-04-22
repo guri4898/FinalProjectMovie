@@ -91,7 +91,10 @@
   <div class="carousel-inner">
     {{#each movies}}
     <div class="carousel-item {{#if @first}}active{{/if}}">
+        <a href="/movie/{{this.title}}">
       <img src="{{this.image}}" class="d-block w-100" alt="{{this.title}}">
+        </a>
+
       <div class="carousel-caption d-none d-md-block">
         <h5>{{this.title}}</h5>
         <p>{{this.description}}</p>
