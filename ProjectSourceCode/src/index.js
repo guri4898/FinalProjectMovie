@@ -575,7 +575,7 @@
         rating = req.body.rate;
       }
       // check for inputs
-      if (req.body.spoiler === 'on'){ // if the spoiler is 'on' set the spoiler to true
+      if (req.body.spoiler == 'on'){ // if the spoiler is 'on' set the spoiler to true
         spoiler = 1;
       } else {
         spoiler = 0;
