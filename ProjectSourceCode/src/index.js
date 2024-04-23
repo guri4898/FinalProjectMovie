@@ -55,6 +55,8 @@
   app.set('view engine', 'hbs');
   app.set('views', path.join(__dirname, 'views'));
   app.use(bodyParser.json()); // specify the usage of JSON for parsing request body.
+  app.use(express.static('public')); // Make sure 'public' is the directory where your client-side scripts are stored
+
 
   // initialize session variables
   app.use(
@@ -195,33 +197,44 @@
     }
   });
 
-
   app.get('/filter-movies', async (req, res) => {
     const { genre, year, director } = req.query;
-    let query = "SELECT * FROM movie WHERE true";
+    let query = `SELECT m.* FROM movie m`;
     const queryParams = [];
+    let conditions = [];
 
     if (genre) {
-        query += " AND genre = $1";
+        query += ` JOIN movie_genres mg ON m.movie_id = mg.movie_id
+                   JOIN genres g ON mg.genre_id = g.genre_id`;
+        conditions.push(`g.genre = $${queryParams.length + 1}`);
         queryParams.push(genre);
     }
     if (year) {
-        query += " AND year = $2";
+        conditions.push(`m.year = $${queryParams.length + 1}`);
         queryParams.push(year);
     }
     if (director) {
-        query += " AND director = $3";
+        conditions.push(`m.director = $${queryParams.length + 1}`);
         queryParams.push(director);
     }
 
+    if (conditions.length > 0) {
+        query += ` WHERE ` + conditions.join(' AND ');
+    }
+
+    console.log(`Query: ${query}`);
+    console.log(`Query Params: ${queryParams}`);
+
     try {
         const movies = await db.any(query, queryParams);
+        console.log(`Fetched ${movies.length} movies`);
         res.json(movies);
     } catch (error) {
         console.error('Failed to fetch movies:', error);
         res.status(500).json({ message: 'Error fetching movies' });
     }
 });
+
 
   app.get('/home', async (req, res) => {
     try {

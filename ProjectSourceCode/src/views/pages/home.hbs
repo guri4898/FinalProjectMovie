@@ -128,49 +128,55 @@
 {{/if}}
 
 <script>
-document.addEventListener("DOMContentLoaded", function() {
-    const filterButtons = document.querySelectorAll('.filter-button'); // Assuming your filter buttons have a class 'filter-button'
-    filterButtons.forEach(button => {
-        button.addEventListener('click', function() {
-            const filterType = this.dataset.filterType; // Assume buttons have data attributes like 'data-filter-type="genre"'
-            const filterValue = this.textContent.trim();
+    document.addEventListener("DOMContentLoaded", function() {
+  document.querySelector('.sidebar').addEventListener('click', function(event) {
+      if (event.target.classList.contains('filter-button')) {
+          const filterType = event.target.dataset.filterType;
+          const filterValue = event.target.dataset.filterValue;
 
-            fetch(`/filter-movies?${filterType}=${encodeURIComponent(filterValue)}`)
-                .then(response => response.json())
-                .then(movies => updateCarousel(movies))
-                .catch(error => console.error('Error fetching movies:', error));
-        });
-    });
-
-    function updateCarousel(movies) {
-        const carouselInner = document.querySelector('.carousel-inner');
-        const carouselIndicators = document.querySelector('.carousel-indicators');
-        carouselInner.innerHTML = ''; // Clear existing slides
-        carouselIndicators.innerHTML = ''; // Clear existing indicators
-
-        movies.forEach((movie, index) => {
-            const activeClass = index === 0 ? 'active' : '';
-            carouselIndicators.innerHTML += `<li data-bs-target="#movieCarousel" data-bs-slide-to="${index}" class="${activeClass}"></li>`;
-
-            carouselInner.innerHTML += `
-                <div class="carousel-item ${activeClass}">
-                    <img src="${movie.image}" class="d-block w-100" alt="${movie.title}">
-                    <div class="carousel-caption d-none d-md-block">
-                        <h5>${movie.title}</h5>
-                        <p>${movie.description}</p>
-                    </div>
-                </div>`;
-        });
-
-        // Reinitialize the carousel (needed if using Bootstrap JS to handle the carousel)
-        if (window.bootstrap && window.bootstrap.Carousel) {
-            const carouselElement = document.querySelector('#movieCarousel');
-            const carouselInstance = new bootstrap.Carousel(carouselElement);
-            carouselInstance.cycle();
-        }
-    }
+          fetch(`/filter-movies?${filterType}=${encodeURIComponent(filterValue)}`)
+              .then(response => response.json())
+              .then(movies => {
+                  updateCarousel(movies);
+              })
+              .catch(error => console.error('Error fetching movies:', error));
+      }
+  });
 });
+    function updateCarousel(movies) {
+  const carouselInner = document.querySelector('.carousel-inner');
+  const carouselIndicators = document.querySelector('.carousel-indicators');
+  carouselInner.innerHTML = '';
+  carouselIndicators.innerHTML = '';
+
+  if (movies.length === 0) {
+      carouselInner.innerHTML = '<div class="carousel-item active"><p>No movies to display</p></div>';
+      return;
+  }
+
+  movies.forEach((movie, index) => {
+      const activeClass = index === 0 ? 'active' : '';
+      carouselIndicators.innerHTML += `<li data-bs-target="#movieCarousel" data-bs-slide-to="${index}" class="${activeClass}"></li>`;
+
+      carouselInner.innerHTML += `
+          <div class="carousel-item ${activeClass}">
+              <img src="${movie.image}" class="d-block w-100" alt="${movie.title}">
+              <div class="carousel-caption d-none d-md-block">
+                  <h5>${movie.title}</h5>
+                  <p>${movie.description}</p>
+              </div>
+          </div>`;
+  });
+
+  // Bootstrap's JavaScript requires re-initialization of the carousel
+  if (window.bootstrap && window.bootstrap.Carousel) {
+      const carouselElement = document.querySelector('#movieCarousel');
+      const carouselInstance = new bootstrap.Carousel(carouselElement);
+      carouselInstance.cycle();
+  }
+}
 </script>
+<script src="../../index.js"></script>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
