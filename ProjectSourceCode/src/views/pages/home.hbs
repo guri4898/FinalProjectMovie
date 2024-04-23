@@ -32,6 +32,22 @@
     max-height: 80vh; /* max height for the carousel itself to ensure it fits in the viewport */
     overflow: hidden; /* hides any overflow caused by larger images */
 }
+.sidebar-heading {
+    font-size: 1.5rem; /* Larger font size */
+    color: #FFD700; /* A gold color for the text */
+    text-transform: uppercase; /* Uppercase text for a modern look */
+    text-align: center; /* Center alignment of the heading */
+    margin-bottom: 20px; /* Space below the heading */
+    padding: 10px; /* Padding around the text */
+    border-bottom: 2px solid #fff; /* White line under the text */
+    background-color: #220B2D; /* Slightly different background to stand out */
+}
+
+/* Optional: Adding a hover effect */
+.sidebar-heading:hover {
+    background-color: #2E1B44; /* Darker shade on hover */
+    cursor: pointer; /* Changes the cursor to suggest clickability */
+}
 .sidebar .btn {
     padding: 0.375rem 0.75rem; /* Smaller padding */
     font-size: 0.875rem; /* Smaller font size */
@@ -78,7 +94,7 @@
 <body>
 
 <div class="sidebar">
-    <h4>Filter</h4>
+    <h4 class="sidebar-heading">Filter</h4>
     <!-- Sidebar content like filters goes here -->
     {{> filter}}
 </div>
