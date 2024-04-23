@@ -198,11 +198,13 @@
 
   app.get('/home', async (req, res) => {
     try {
+      const filterOptions = await getFilterOptions();
       const randomMoviesQuery = 'SELECT * FROM movie ORDER BY RANDOM() LIMIT 5'; // Adjust limit as needed
       const movies = await db.any(randomMoviesQuery);
   
       res.render('pages/home', {
         movies,
+        filterOptions,
         searchedTF: false,
         display: true
       });
@@ -302,36 +304,27 @@
 
   });
 
-  app.get('/filter-page', async (req, res) => {
-    const filterOptions = await getFilterOptions();
-    res.render('filterPage', { filterOptions });
-  });
+
   const getFilterOptions = async () => {
     try { 
         const genresResult = await db.query('SELECT genre FROM genres ORDER BY genre;');
         const yearsResult = await db.query('SELECT DISTINCT year FROM movie ORDER BY year;');
         const directorsResult = await db.query('SELECT DISTINCT director FROM movie ORDER BY director;');
 
-        // Check if any of the results are undefined or not in expected format
-        if (!genresResult.rows || !yearsResult.rows || !directorsResult.rows) {
-            console.error('One of the queries did not return the expected format:', {
-                genresResult,
-                yearsResult,
-                directorsResult
-            });
-            return { genres: [], years: [], directors: [] };
-        }
+        console.log('Genres:', genresResult);
+        console.log('Years:', yearsResult);
+        console.log('Directors:', directorsResult);
 
         return {
-            genres: genresResult.rows.map(row => row.genre),
-            years: yearsResult.rows.map(row => row.year),
-            directors: directorsResult.rows.map(row => row.director)
+            genres: genresResult.map(row => row.genre),
+            years: yearsResult.map(row => row.year),
+            directors: directorsResult.map(row => row.director)
         };
     } catch (error) {
         console.error('Error fetching filter options:', error);
         return { genres: [], years: [], directors: [] };
     }
-  };
+};
 
 
 
