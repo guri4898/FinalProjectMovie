@@ -196,6 +196,33 @@
   });
 
 
+  app.get('/filter-movies', async (req, res) => {
+    const { genre, year, director } = req.query;
+    let query = "SELECT * FROM movie WHERE true";
+    const queryParams = [];
+
+    if (genre) {
+        query += " AND genre = $1";
+        queryParams.push(genre);
+    }
+    if (year) {
+        query += " AND year = $2";
+        queryParams.push(year);
+    }
+    if (director) {
+        query += " AND director = $3";
+        queryParams.push(director);
+    }
+
+    try {
+        const movies = await db.any(query, queryParams);
+        res.json(movies);
+    } catch (error) {
+        console.error('Failed to fetch movies:', error);
+        res.status(500).json({ message: 'Error fetching movies' });
+    }
+});
+
   app.get('/home', async (req, res) => {
     try {
       const filterOptions = await getFilterOptions();
