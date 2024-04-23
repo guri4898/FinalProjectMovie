@@ -91,7 +91,34 @@
         </form>
     </div>
 
-{{#if movies}}
+{{#if searchedTF}}
+{{#if noData}}
+<div class="position-absolute top-50 start-50 translate-middle">
+  <h2>No Movies Found.</h2>
+  <button type="button" class="btn btn-outline-secondary d-block mx-auto mt-3" onclick="window.location.href='/home'">Go
+    Back</button>
+</div>
+{{else}}
+<div class="container">
+  <div class="row">
+    {{#each movies}}
+    <div class="col-lg-3 col-md-4 col-sm-6 mb-4">
+       <a href="/movie/{{title}}"> <!-- Add this anchor tag -->
+              <div class="card bg-dark text-white">
+                <img src="{{image}}" class="card-img" alt="...">
+                <div class="card-img-overlay">
+                </div>
+              </div>
+            </a> 
+    </div>
+    {{/each}}
+  </div>
+</div>
+</div>
+{{/if}}
+
+{{else}}
+<!-- Carousel code -->
 <div id="movieCarousel" class="carousel slide" data-bs-ride="carousel">
   <ol class="carousel-indicators">
     {{#each movies}}
@@ -120,10 +147,6 @@
     <span class="carousel-control-next-icon" aria-hidden="true"></span>
     <span class="visually-hidden">Next</span>
   </a>
-</div>
-{{else}}
-<div style="text-align: center">
-  <p>No movies to display</p>
 </div>
 {{/if}}
 
