@@ -112,7 +112,7 @@
                         <p class="card-text">Release Year: {{movie.year}}</p>
                         <p class="card-text">Director: {{movie.director}}</p>
                         <p class="card-text">Plot: {{movie.description}}</p>
-                        <p class="card-text">Rating: {{movie.rating}}/10</p>
+                        <p class="card-text">Rating: {{reviewList.averageRating.round}}/10</p>
                         <!-- Button trigger modal -->
                         <a href="#" class="btn btn-primary" data-toggle="modal" data-target="#reviewModal">Write a Review</a>
                     </div>
@@ -131,9 +131,9 @@
                                 </div>
                                 <div class="card-text-content">
                                     {{!-- NEED TO ADD THE USERNAME AND THE RATING OF THE FILM --}}
-                                    <p class="card-text">{{review.username}}</p>
+                                    <h4 class="card-text">{{username}}</h4>
                                     <p class="card-text">{{review}}</p>
-                                    <div class="rating-star">5 ★</div>
+                                    <div class="rating-star">{{rating}} ★</div>
                                 </div>
                             </div>
                         </div>

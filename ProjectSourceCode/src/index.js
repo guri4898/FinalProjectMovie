@@ -371,7 +371,49 @@
       const getReviews = `SELECT * FROM reviews WHERE movie_id = $1;`;
 
       db.any(getReviews, [movie.movie_id])
-      .then(function(reviewList){
+      .then(async function(reviewList){
+
+        const getRating = `SELECT ROUND(AVG(rating),2) FROM rating WHERE movie_id = $1;`;
+        const averageRating = await db.one(getRating, [movie.movie_id]);
+        reviewList['averageRating'] = averageRating;
+
+        const getUserData = `SELECT user_id, username FROM users;`;
+
+        // Fetch the user data from the database
+        const userData = await db.any(getUserData);
+
+        const userMap = {};
+        userData.forEach(user => {
+          userMap[user.user_id] = user.username;
+        });
+
+        reviewList.forEach(review => {
+          // Find the matching username from the userMap
+          const username = userMap[review.user_id];
+          
+          // Add the username to the review object
+          review.username = username;
+        });
+
+        const getRatingsForReviews = ` SELECT rv.review_id, r.rating FROM rating r 
+        JOIN reviews rv ON r.user_id = rv.user_id AND r.movie_id = rv.movie_id
+        WHERE rv.review_id = ANY($1) AND r.movie_id = $2;`;
+
+        const reviewIds = reviewList.map(review => review.review_id);
+
+        // Execute the query to get ratings for the reviews
+        const ratingsData = await db.any(getRatingsForReviews, [reviewIds, movie.movie_id]);
+
+        // Create a mapping from review_id to rating
+        const ratingMap = {};
+        ratingsData.forEach(row => {
+          ratingMap[row.review_id] = row.rating;
+        });
+        
+        reviewList.forEach(review => {
+          const rating = ratingMap[review.review_id];
+          review.rating = rating;
+        });
 
         console.log({reviewList});
         res.status(200).render('pages/singleMovie', {movie,
@@ -538,14 +580,18 @@
       const getMovieQuery = `SELECT * FROM movie WHERE movie_id = ${movieID}`;
       const movieRender = await db.one(getMovieQuery);
       
+      const getUserName = `SELECT username FROM users WHERE user_id = ${user_id}`;
+      const username = await db.one(getUserName);
       // if no errors render the movie page again
       // res.status(200).redirect('movie/${req.body.title}', {
       //   movieRender,
       //   movieID: movieRender.movie_id,
       //   display: true,
       //   exists: true});
+      movieRender['rating'] = rating;
+      movieRender['username'] = username;
       console.log("movie title in rateMovie:", movieRender.title);
-        res.status(200).redirect(`movie/${movieRender.title}`)
+        res.status(200).redirect(`movie/${movieRender.title}`);
 
     } catch(err) {
       console.log(err);
