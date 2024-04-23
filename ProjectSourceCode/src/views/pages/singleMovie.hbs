@@ -15,6 +15,37 @@
     <!-- Bootstrap JavaScript library -->
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
     <style>
+        .btn-primary {
+            background-color: #be3265;
+            color: white;
+            padding: 8px;
+            font-size: 16px;
+            border: none;
+            cursor: pointer;
+            border-radius: 12px;
+        }
+        .rating-star {
+            display: inline-block;
+            font-size: 20px;
+            color: gold;
+            position: absolute;
+            bottom: 10px;
+            right: 10px;
+        }
+        .spoiler-badge {
+            position: absolute;
+            top: 10px;
+            right: 7px;
+            width: 60px;
+        }
+        .card-text-content {
+            margin-right: 70px;
+        }
+        .card-body {
+        color: white;
+        background-color: #10091b;
+
+        }
         .movie-poster 
         {
             max-width: 550px; 
@@ -66,17 +97,18 @@
 
 <body>
     {{#if exists}}
+    <div style="background-color: #10091b;">
     <div class="container">
         <div class="row mt-5">
             <div class="col-md-6">
                 <div class="card">
                     {{#if movie.image}}
-                    <img src="{{movie.image}}" class="card-img-top img-fluid movie-poster" alt="Movie Poster">
+                    <img src="{{movie.image}}" class="card-img-top img-fluid movie-poster" alt="Movie Poster" style="background-color: #10091b;">
                     {{else}}
                     <img src="../../../../resources/img/MovieMasterLogo.png" class="card-img-top img-fluid movie-poster" alt="Movie Poster">
                     {{/if}}
                     <div class="card-body">
-                        <h5 class="card-title">{{movie.title}}</h5>
+                        <h5 class="card-title" style="color: rgb(251, 200, 207);">{{movie.title}}</h5>
                         <p class="card-text">Release Year: {{movie.year}}</p>
                         <p class="card-text">Director: {{movie.director}}</p>
                         <p class="card-text">Plot: {{movie.description}}</p>
@@ -94,7 +126,15 @@
                         {{#each reviewList}}
                         <div class="card mb-3">
                             <div class="card-body">
-                                <p class="card-text">{{review}}</p>
+                                <div class="spoiler-badge">
+                                    <p class="card-text">{{#if spoiler}}<span class="badge badge-danger">Spoiler</span>{{/if}}</p>
+                                </div>
+                                <div class="card-text-content">
+                                    {{!-- NEED TO ADD THE USERNAME AND THE RATING OF THE FILM --}}
+                                    <p class="card-text">{{review.username}}</p>
+                                    <p class="card-text">{{review}}</p>
+                                    <div class="rating-star">5 ★</div>
+                                </div>
                             </div>
                         </div>
                         {{/each}}
@@ -103,6 +143,9 @@
                         {{/if}}
                     </div>
                 </div>
+            </div>
+            <div style="margin-top: 75px;">
+
             </div>
         </div>
     </div>
@@ -165,6 +208,7 @@
     {{else}}
     <h2>Sorry, Movie not found</h2>
     {{/if}}
+    </div>
 </body>
 
 </html>
