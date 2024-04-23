@@ -1,1 +1,47 @@
-<p>Hello</p>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Favorite Movies</title>
+    <link rel="stylesheet" href="../../resources/css/style.css"> 
+</head>
+    <style>
+    body {
+      background-color: #281543;
+      color: #ffffff;
+    }
+    .form-control {
+      background-color: #ffffff;
+      color: #11091c;
+    }
+    .btn-primary {
+      background-color: #be3265;
+      color: #ffffff;
+      border: none;
+    }
+  </style>
+<!-- This is just the code from addFriends -->
+<div id="formContainer">
+  <h1 style = "text-align: center;">Favorite Movies</h1>
+<form action="/addFriend" method="POST" class="form-inline my-2 my-lg-0">
+  <br>
+  <div class="search-bar">
+    <div class="row">
+      <div class="col col-3">
+      </div>
+      <div class="col-7">
+        <nav class="search-bar-1">
+          <input class="form-control mr-sm-2" type="search" id="usernameSearch" name="usernameSearch" placeholder="Username"
+            aria-label="Username">
+        </nav>
+      </div>
+      <div class="col">
+        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Add</button>
+      </div>
+    </div>
+  </div>
+</form>
+</div>
+</html>
+
