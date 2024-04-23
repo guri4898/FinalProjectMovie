@@ -392,6 +392,20 @@
   });
 
   //display single movie
+  app.get('/singleMovie', (req, res) => {
+
+    const query = "SELECT m.title, m.image FROM favorite f, movie m WHERE f.user_id = $1;";
+
+    db.any(query, [req.session.user.user_id])
+    .then(function(movies){
+      res.status(200).render('pages/singleMovie', {movies,
+      display: true});
+    })
+    .catch(function(error){
+      res.status(500).render('pages/singleMovie', {error: true,
+      display: true});
+    }); 
+  });
 
   app.get('/movie/:title', (req, res) => {
 
