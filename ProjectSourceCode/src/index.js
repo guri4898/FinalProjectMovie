@@ -153,8 +153,10 @@
     });
   });
 
-
-
+//for the favorite movies
+  app.get('/favoriteMovies', (req, res) => {
+    res.render('pages/favoriteMovie');
+  });
 
 
 
