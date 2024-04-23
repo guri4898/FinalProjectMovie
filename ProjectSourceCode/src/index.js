@@ -317,6 +317,7 @@
     db.one(query, [req.body.username])
     .then(async function(user){
 
+      const filterOptions = await getFilterOptions();
       const match = await bcrypt.compare(req.body.password, user.password);  
       const randomMoviesQuery = 'SELECT * FROM movie ORDER BY RANDOM() LIMIT 5'; // Adjust limit as needed
       const movies = await db.any(randomMoviesQuery);      
@@ -328,6 +329,7 @@
         res.status(200);
         res.render('pages/home',{
           display: true,
+          filterOptions,
           movies
         }); //need to redirect to api route that displays movies
       }
