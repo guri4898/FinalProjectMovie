@@ -167,53 +167,62 @@
 {{/if}}
 
 <script>
-    document.addEventListener("DOMContentLoaded", function() {
-  document.querySelector('.sidebar').addEventListener('click', function(event) {
-      if (event.target.classList.contains('filter-button')) {
-          const filterType = event.target.dataset.filterType;
-          const filterValue = event.target.dataset.filterValue;
+     document.addEventListener("DOMContentLoaded", function() {
+        document.querySelector('.sidebar').addEventListener('click', function(event) {
+            if (event.target.classList.contains('filter-button')) {
+                const filterType = event.target.dataset.filterType;
+                const filterValue = event.target.dataset.filterValue;
 
-          fetch(`/filter-movies?${filterType}=${encodeURIComponent(filterValue)}`)
-              .then(response => response.json())
-              .then(movies => {
-                  updateCarousel(movies);
-              })
-              .catch(error => console.error('Error fetching movies:', error));
-      }
-  });
-});
-    function updateCarousel(movies) {
-  const carouselInner = document.querySelector('.carousel-inner');
-  const carouselIndicators = document.querySelector('.carousel-indicators');
-  carouselInner.innerHTML = '';
-  carouselIndicators.innerHTML = '';
+                fetch(`/filter-movies?${filterType}=${encodeURIComponent(filterValue)}`)
+                    .then(response => response.json())
+                    .then(movies => {
+                        updateMovieDisplay(movies);
+                    })
+                    .catch(error => console.error('Error fetching movies:', error));
+            }
+        });
+    });
 
-  if (movies.length === 0) {
-      carouselInner.innerHTML = '<div class="carousel-item active"><p>No movies to display</p></div>';
-      return;
-  }
+    function updateMovieDisplay(movies) {
+    const container = document.querySelector('.main-content');
+    container.innerHTML = ''; // Clear existing movie display
 
-  movies.forEach((movie, index) => {
-      const activeClass = index === 0 ? 'active' : '';
-      carouselIndicators.innerHTML += `<li data-bs-target="#movieCarousel" data-bs-slide-to="${index}" class="${activeClass}"></li>`;
+    if (movies.length === 0) {
+        container.innerHTML = '<h2>No Movies Found.</h2>';
+        return;
+    }
 
-      carouselInner.innerHTML += `
-          <div class="carousel-item ${activeClass}">
-              <img src="${movie.image}" class="d-block w-100" alt="${movie.title}">
-              <div class="carousel-caption d-none d-md-block">
-                  <h5>${movie.title}</h5>
-                  <p>${movie.description}</p>
-              </div>
-          </div>`;
-  });
+    const row = document.createElement('div');
+    row.classList.add('row');
 
-  // Bootstrap's JavaScript requires re-initialization of the carousel
-  if (window.bootstrap && window.bootstrap.Carousel) {
-      const carouselElement = document.querySelector('#movieCarousel');
-      const carouselInstance = new bootstrap.Carousel(carouselElement);
-      carouselInstance.cycle();
-  }
-}
+    movies.forEach(movie => {
+        const col = document.createElement('div');
+        col.classList.add('col-lg-3', 'col-md-4', 'col-sm-6', 'mb-4');
+
+        const anchor = document.createElement('a');
+        anchor.href = `/movie/${movie.title}`;
+
+        const card = document.createElement('div');
+        card.classList.add('card', 'bg-dark', 'text-white');
+
+        const img = document.createElement('img');
+        img.classList.add('card-img');
+        img.src = movie.image;
+        img.alt = '...';
+
+        const overlay = document.createElement('div');
+        overlay.classList.add('card-img-overlay');
+
+        card.appendChild(img);
+        card.appendChild(overlay);
+        anchor.appendChild(card);
+        col.appendChild(anchor);
+        row.appendChild(col);
+    });
+
+    container.appendChild(row);
+    }
+
 </script>
 <script src="../../index.js"></script>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
