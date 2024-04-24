@@ -19,21 +19,35 @@
       background-color: #be3265;
       color: #ffffff;
       border: none;
+      
+    }
+    .movie-card {
+        padding: 10px;  /* Adds some spacing around the card */
+        text-align: center;  /* Centers content within the card */
+    }
+    .movie-title {
+        font-size: 16px;  /* Adjusts the font size of the title */
     }
   </style>
 <!-- This is just the code from addFriends -->
-<div id="formContainer">
-  <h1 style = "text-align: center;">Favorite Movies</h1>
-<div class="card">
-  <div class="card-body">
-    <h5 class="card-title">{{name}}</h5>
-    <p class="card-text">Favorite Movies:</p>
-    <ul class="list-group">
+<body>
+  <div class="container">  <!-- Use Bootstrap container for layout -->
+    <h1 style="text-align: center;">Favorite Movies</h1>
+
+    <div class="row">  <!-- Bootstrap row for grid layout -->
       {{#each movies}}
-        <li class="list-group-item">{{title}}</li>
+      <div class="col-md-2">  <!-- Each card takes up 2 columns (for 5 in a row) -->
+        <div class="card movie-card">  <!-- Apply custom styling to cards -->
+          <div class="card-body">
+            <h5 class="movie-title">{{title}}</h5>  <!-- Movie title -->
+            <img src="{{image}}" alt="{{title}} movie poster" class="img-fluid">  <!-- Movie poster -->
+          </div>
+        </div>
+      </div>
       {{/each}}
-    </ul>
+    </div>
+
   </div>
-</div>
+</body>
 </html>
 

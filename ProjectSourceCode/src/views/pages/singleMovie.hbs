@@ -108,7 +108,11 @@
                     <img src="../../../../resources/img/MovieMasterLogo.png" class="card-img-top img-fluid movie-poster" alt="Movie Poster">
                     {{/if}}
                     <div class="card-body">
-                        <a href="/favoriteMovies" class="btn btn-primary" onclick="addToFavorites">Add Movie to Favorites</a>
+                        <form action = "/favoriteMovies" method ="post" >
+                            <input type="hidden" name="movie_id" value="{{movie.movie_id}}">
+                            <button type="submit" class="btn btn-primary">Add Movie to Favorites</button>
+                        </form>
+                        {{!-- <a href="/favoriteMovies" class="btn btn-primary" onclick="addToFavorites">Add Movie to Favorites</a> --}}
                         <br>
                         <br>
                         <h5 class="card-title" style="color: rgb(251, 200, 207);">{{movie.title}}</h5>

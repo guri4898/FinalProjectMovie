@@ -64,7 +64,6 @@ CREATE TABLE friend(
 );
 
 DROP TABLE IF EXISTS favorite CASCADE;
-
 CREATE TABLE favorite(
     user_id INT NOT NULL,
     movie_id INT NOT NULL,

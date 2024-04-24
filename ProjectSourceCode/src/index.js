@@ -154,9 +154,10 @@
   });
 
 //for the favorite movies
-  app.get('/favoriteMovies', (req, res) => {
-    res.render('pages/favoriteMovies');
-  });
+  // app.get('/favoriteMovies', (req, res) => {
+  //   res.render('pages/favoriteMovies');
+
+  // });
 
 
 
@@ -397,17 +398,18 @@
   });
 
   //display single movie
-  app.get('/singleMovie', (req, res) => {
+  app.get('/favoriteMovies', (req, res) => {
 
-    const query = "SELECT m.title, m.image FROM favorite f, movie m WHERE f.user_id = $1;";
+    const query = "SELECT m.title, m.image FROM favorite f INNER JOIN movie m ON f.movie_id = m.movie_id WHERE f.user_id = $1;";
 
     db.any(query, [req.session.user.user_id])
     .then(function(movies){
-      res.status(200).render('pages/singleMovie', {movies,
+      console.log({movies})
+      res.status(200).render('pages/favoriteMovies', {movies,
       display: true});
     })
     .catch(function(error){
-      res.status(500).render('pages/singleMovie', {error: true,
+      res.status(500).render('pages/favoriteMovies', {error: true,
       display: true});
     }); 
   });
@@ -630,4 +632,22 @@
         display: true,
         exists: false});
     }
+  });
+
+  app.post('/favoriteMovies', async (req, res) => {
+
+    const query = 'INSERT INTO favorite (user_id, movie_id) VALUES ($1, $2);';
+    const movieID = req.body.movie_id;
+    const userID = req.session.user.user_id;
+
+    db.none(query, [userID, movieID])
+    .then(()=>{
+      res.status(200).redirect("/favoriteMovies");
+    })
+    .catch(error =>{
+      res.status(500).render('pages/home', {error: true,
+      display: true})
+      ;
+    });
+
   });
