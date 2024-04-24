@@ -146,11 +146,18 @@
   });
 
   app.get('/account_settings', (req, res) => {
+    if (!req.session.user || !req.session.user.user_id) {
+      res.status(200).render('pages/account_settings', {
+          error: "You are not logged in!",
+          display: true
+      });
+  } else {
     res.render('pages/account_settings',{
       display: true,
       username : req.session.user.username,
       email: req.session.user.email
     });
+  }
   });
 
 //for the favorite movies
@@ -163,7 +170,7 @@
 
 
   app.post('/account_settings', async (req, res) => {
-
+    
     try{
       const username = req.body.username;
       // if the user is trying to set its username to an empty string
