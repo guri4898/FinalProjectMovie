@@ -400,18 +400,29 @@
   //display single movie
   app.get('/favoriteMovies', (req, res) => {
 
-    const query = "SELECT m.title, m.image FROM favorite f INNER JOIN movie m ON f.movie_id = m.movie_id WHERE f.user_id = $1;";
+    if (!req.session.user || !req.session.user.user_id) {
+      res.status(200).render('pages/favoriteMovies', {
+          error: "You are not logged in.",
+          display: true
+      });
+  } else {
+      const query = "SELECT m.title, m.image FROM favorite f INNER JOIN movie m ON f.movie_id = m.movie_id WHERE f.user_id = $1;";
 
-    db.any(query, [req.session.user.user_id])
-    .then(function(movies){
-      console.log({movies})
-      res.status(200).render('pages/favoriteMovies', {movies,
-      display: true});
-    })
-    .catch(function(error){
-      res.status(500).render('pages/favoriteMovies', {error: true,
-      display: true});
-    }); 
+      db.any(query, [req.session.user.user_id])
+          .then(function(movies) {
+              console.log({ movies });
+              res.status(200).render('pages/favoriteMovies', {
+                  movies,
+                  display: true
+              });
+          })
+          .catch(function(error) {
+              res.status(500).render('pages/favoriteMovies', {
+                  error: true,
+                  display: true
+              });
+          });
+  }
   });
 
   app.get('/movie/:title', (req, res) => {
