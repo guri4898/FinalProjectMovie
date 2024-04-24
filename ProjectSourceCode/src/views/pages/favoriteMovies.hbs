@@ -1,57 +1,72 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Favorite Movies</title>
-    <style>
-      h1{
-        text-align: center;
-        margin-top: 25px;
-        margin-bottom: 35px;
-      }
-    </style>
-    <link rel="stylesheet" href="../../resources/css/style.css"> 
-</head>
-    <style>
-    body {
-      background-color: #281543;
-      color: #ffffff;
-    }
-    .form-control {
-      background-color: #ffffff;
-      color: #11091c;
-    }
-    .btn-primary {
-      background-color: #be3265;
-      color: #ffffff;
-      border: none;
-      
-    }
-    .movie-card {
-        width: 250px;
-        height: 370px;
-        padding: 3px;
-        margin-bottom: 25px;
-        padding: 10px;  /* Adds some spacing around the card */
-        text-align: center;  /* Centers content within the card */
-    }
-    .movie-title {
-        font-size: 16px;  /* Adjusts the font size of the title */
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Favorite Movies</title>
+  <style>
+    h1 {
+      text-align: center;
+      margin-top: 25px;
+      margin-bottom: 35px;
     }
   </style>
+  <link rel="stylesheet" href="../../resources/css/style.css">
+</head>
+<style>
+  body {
+    background-color: #281543;
+    color: #ffffff;
+  }
+
+  .form-control {
+    background-color: #ffffff;
+    color: #11091c;
+  }
+
+  .btn-primary {
+    background-color: #be3265;
+    color: #ffffff;
+    border: none;
+
+  }
+
+  .movie-card {
+    width: 250px;
+    height: 370px;
+    padding: 3px;
+    margin-bottom: 25px;
+    padding: 10px;
+    /* Adds some spacing around the card */
+    text-align: center;
+    /* Centers content within the card */
+  }
+
+  .movie-title {
+    font-size: 16px;
+    /* Adjusts the font size of the title */
+  }
+</style>
 <!-- This is just the code from addFriends -->
+
 <body>
-  <div class="container">  <!-- Use Bootstrap container for layout -->
+  <div class="container"> <!-- Use Bootstrap container for layout -->
     <h1 style="text-align: center;">Favorite Movies</h1>
 
-    <div class="row">  <!-- Bootstrap row for grid layout -->
+    {{#if error}} <!-- Error message if user is not logged in -->
+    <div class="alert alert-danger" role="alert">
+      {{error}}
+    </div>
+    {{/if}}
+
+    <div class="row"> <!-- Bootstrap row for grid layout -->
       {{#each movies}}
-      <div class="col-md-3">  <!-- Each card takes up 3 columns (for 4 in a row) -->
-        <div class="card movie-card">  <!-- Apply custom styling to cards -->
+      <div class="col-md-3"> <!-- Each card takes up 3 columns (for 4 in a row) -->
+        <div class="card movie-card"> <!-- Apply custom styling to cards -->
           <div class="card-body">
-            <h5 class="movie-title">{{title}}</h5>  <!-- Movie title -->
-            <img src="{{image}}" alt="{{title}} movie poster" class="img-fluid">  <!-- Movie poster -->
+            <h5 class="movie-title">{{title}}</h5> <!-- Movie title -->
+            <img src="{{image}}" alt="{{title}} movie poster" class="img-fluid"> <!-- Movie poster -->
           </div>
         </div>
       </div>
@@ -59,5 +74,5 @@
     </div>
   </div>
 </body>
-</html>
 
+</html>
