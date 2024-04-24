@@ -170,11 +170,13 @@
 
 
   app.post('/account_settings', async (req, res) => {
-    
+    console.log('inside API');
     try{
       const username = req.body.username;
+      console.log('username', username);
       // if the user is trying to set its username to an empty string
       if (!username){
+        console.log('inside no username if statement')
         return res.status(500).render('pages/account_settings', {
           display: true,
           message: 'The user cannot be empty. Try again.',
@@ -184,6 +186,7 @@
       }
 
       if (username === req.session.user.username){
+        console.log('inside if same username if statement')
         return res.status(500).render('pages/account_settings', {
           display: true,
           message: 'The new username is the same as the current one. Try again.',
@@ -194,6 +197,7 @@
 
       updateQuery = `UPDATE users SET username = '${username}' WHERE user_id = ${req.session.user.user_id}`;
       await db.none(updateQuery);
+      console.log('just before rendering');
       res.status(200).render('pages/account_settings', {
         display: true,
         message: 'Username updated successfully',
@@ -206,6 +210,8 @@
       res.status(500).json({message: 'Invalid input'});
     }
   });
+
+
 
   app.get('/filter-movies', async (req, res) => {
     const { genre, year, director } = req.query;

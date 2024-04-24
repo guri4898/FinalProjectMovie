@@ -1,5 +1,8 @@
 <div style="background-color: #10091b;">
     <div style="margin: 5%; margin-top: 2%;">
+        {{> message}}
+    </div>
+    <div style="margin: 5%; margin-top: 2%;">
         {{#if error}}
         <div class="alert alert-danger" role="alert">
             {{error}}
@@ -21,7 +24,6 @@
                 <h2 style="font-size: x-large; color: rgb(251, 200, 207);">Email</h2>
                 <p style="border-radius: 7px; padding: 6px; width: 100%; box-sizing: border-box; background-color: white;">{{email}}</p>
                 <br>
-                {{!-- Make the save button work --}}
                 <input type="submit" value="Save" style="background-color: rgb(0, 95, 249); color:aliceblue; border-radius: 5px; border-width: 0px;"> 
             </form>
         </div>
